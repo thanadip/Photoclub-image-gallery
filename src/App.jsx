@@ -6,8 +6,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 //components
 import Navbar from "./components/Navbar";
-import About from "./components/About";
-import Contact from "./components/Contact";
+import About from "./components/about";
+import Contact from "./components/contact";
 
 function App() {
   return (
