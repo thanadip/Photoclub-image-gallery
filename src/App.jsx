@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import About from "./components/about";
 import Contact from "./components/contact";
+import MusicBG from "./components/MusicBG";
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </BrowserRouter>
-
+      <MusicBG />
     </>
   );
 }
