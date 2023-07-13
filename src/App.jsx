@@ -9,6 +9,7 @@ import Navbar from "./components/Navbar";
 import About from "./components/about";
 import Contact from "./components/contact";
 import MusicBG from "./components/MusicBG";
+import Register from "./components/Register";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Routes>
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </BrowserRouter>
       <MusicBG />
