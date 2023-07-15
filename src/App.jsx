@@ -12,7 +12,6 @@ import Start from "./pages/Start";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
 
-
 function App() {
   return (
     <BrowserRouter>
