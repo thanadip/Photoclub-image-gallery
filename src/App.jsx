@@ -11,6 +11,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Start from "./pages/Start";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
+import Register from "./pages/Register";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/" element={<Start />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </BrowserRouter>
   );
