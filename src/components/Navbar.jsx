@@ -22,7 +22,7 @@ function Navbar() {
             <Link>
             <Text mx={2}>Contact</Text>
             </Link>
-            <Link>
+            <Link to = '/login'>
             <Text mx={2}>Log-in</Text>
             </Link>
           </Flex>
