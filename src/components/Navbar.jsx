@@ -10,16 +10,16 @@ function Navbar() {
           <Text fontSize="xl" fontWeight="bold">Logo</Text>
         </ Link>
           <Flex>
-            <Link >
+            <Link to={'/index'}>
             <Text mx={2}>Home</Text>
             </Link>
-            <Link>
+            <Link to={'/about'}>
             <Text mx={2}>About</Text>
             </Link>
             <Link to='/register'>
             <Text mx={2}>Register</Text>
             </Link>
-            <Link>
+            <Link to = '/contact'>
             <Text mx={2}>Contact</Text>
             </Link>
             <Link to = '/login'>

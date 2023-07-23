@@ -1,9 +1,13 @@
 import { Button, Card, Flex, FormControl, FormLabel, Input, Link, Text } from '@chakra-ui/react'
 import React from 'react'
 
+const handleButtonClick = ()=>{
+  alert('hello bitchass')
+}
+
 function Login() {
   return (
-    <Flex h={'100vh'}justifyContent={'center'} bg={'black'}>
+    <Flex h={'100dvh'}justifyContent={'center'} bg={'black'}>
       <Card my={'auto'}  justify={'center'} padding={'2.5vw'}>
         <Flex flexDirection={'column'}>
   
@@ -19,12 +23,12 @@ function Login() {
 
           <Flex justifyContent={'center'} mt={'4'} flexDirection={'column'}>
 
-          <Button colorScheme="teal" size="md" >
+          <Button colorScheme="teal" size="md" onClick={handleButtonClick}>
                 login
           </Button>
 
           <Text fontSize={'1xl'} textAlign={'center'} mt={2}>
-            Don't have an account?
+            Don't have an account?{' '}
             <Link color="teal.500" href="/register"> Register now </Link>
           </Text>
 

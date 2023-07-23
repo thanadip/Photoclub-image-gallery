@@ -11,6 +11,8 @@ import {
   FormHelperText,
   Input,
   Button,
+  ButtonGroup,
+  Link,
 } from '@chakra-ui/react';
 
 function Register() {
@@ -19,7 +21,7 @@ function Register() {
   };
 
   return (
-    <Flex h={'100vh'} justify={'center'} backgroundColor={'teal.400'}>
+    <Flex h={'100dvh'} justify={'center'} backgroundColor={'teal.400'}>
       <Flex mr={'auto'}>
         <Stack my={'auto'} mx={'5vw'} pb={'10vw'}>
           <Text fontSize={'6xl'} textAlign={'left'}>
@@ -59,9 +61,24 @@ function Register() {
               </Flex>
               <Input type="text" placeholder="Line ID" />
 
-              <Button mt={4} colorScheme="teal" size="lg" onClick={handleRegister}>
-                Submit
-              </Button>
+              <ButtonGroup>
+
+                <Button mt={4} colorScheme="teal" size="lg" onClick={handleRegister}>
+                  Submit
+                </Button>
+                
+                <Link href="/Index">
+                  <Button mt={4} colorScheme="gray" size="lg" >
+                    <Text color={'gray'}> Cancle </Text>
+                  </Button>
+                </Link>
+
+              </ButtonGroup>
+              
+              <Text mt={'4'} textAlign={'center'}> already have an account?{' '}
+              <Link textDecoration="underline" href="/login" color={"teal.500"} >Log in</Link> 
+              </Text>
+
             </FormControl>
           </Card>
         </Stack>

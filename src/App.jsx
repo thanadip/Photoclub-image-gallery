@@ -13,6 +13,7 @@ import Contact from "./pages/Contact";
 import About from "./pages/About";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import Index from "./pages/Index";
 
 function App() {
   return (
@@ -22,7 +23,8 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login/>}/>
+        <Route path="/login" element={<Login />}/>
+        <Route path="/index" element={<Index />}/>
       </Routes>
     </BrowserRouter>
   );
