@@ -1,5 +1,6 @@
-import { Button, Card, Flex, FormControl, FormLabel, Input, Link, Text } from '@chakra-ui/react'
+import { Button, Card, Flex, FormControl, FormLabel, Input, Text } from '@chakra-ui/react'
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const handleButtonClick = ()=>{
   alert('hello bitchass')
@@ -16,10 +17,10 @@ function Login() {
         <FormControl padding={'1vw'} isRequired>
 
           <FormLabel padding={'0.5vh'}>Username</FormLabel>
-          <Input placeholder='First name' marginBottom={'1vw'}/>
+          <Input placeholder='Username' marginBottom={'1vw'}/>
 
           <FormLabel>Password</FormLabel>
-          <Input placeholder='First name' />
+          <Input placeholder='Password' />
 
           <Flex justifyContent={'center'} mt={'4'} flexDirection={'column'}>
 
@@ -29,7 +30,7 @@ function Login() {
 
           <Text fontSize={'1xl'} textAlign={'center'} mt={2}>
             Don't have an account?{' '}
-            <Link color="teal.500" href="/register"> Register now </Link>
+            <Text color={'teal.500'} textDecoration={'underline'} as={Link} to='/register'> Register now </Text>
           </Text>
 
           </Flex>
