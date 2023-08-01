@@ -14,15 +14,28 @@ function Login() {
     try {
       
       const response = await axios.post('http://localhost:5001/login',{
-      
+
       username,
       password,
 
       });
+      
+      console.log('Response from backend:', response.data);
+      
+      const userType = response.data.user_type_id;
 
-      if(response.status === 200){
-        alert('Login successful!');
-        navigate('/index');
+      if(response.status === 200 ){
+        console.log('User Type:', userType);
+        if(userType === 1){
+          navigate('/user');
+        }else if(userType === 2 || userType === 3){
+          navigate('/admin');
+        }else if(userType === 0){
+          navigate('/blocked');
+        }else{
+          alert('wrong user type');
+        }
+
       }else{
         alert('Login failed');
       }

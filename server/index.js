@@ -72,9 +72,13 @@ app.post('/login', async (req ,res) => {
         id: existingUser[0].id,
         username: existingUser[0].username,
         user_email: existingUser[0].user_email,
+        password: existingUser[0].password,
+        user_phone: existingUser[0].user_phone,
+        user_type_id: existingUser[0].user_type_id,
+
       };
       const token = generateToken(user);
-      return res.status(200).json({ message: 'Login successful', token: token });
+      return res.status(200).json({ message: 'Login successful', token: token ,user_type_id: user.user_type_id , username: user.username});
 
     })
 

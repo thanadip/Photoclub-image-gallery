@@ -14,6 +14,9 @@ import About from "./pages/About";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Index from "./pages/Index";
+import UserHome from "./pages/UserHome";
+import AdminHome from "./pages/AdminHome";
+import Blocked from "./pages/Blocked";
 
 function App() {
   return (
@@ -25,6 +28,9 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />}/>
         <Route path="/index" element={<Index />}/>
+        <Route path="/user" element={<UserHome />}/>
+        <Route path="/admin" element={<AdminHome />}/>
+        <Route path="/blocked" element={<Blocked />}/>
       </Routes>
     </BrowserRouter>
   );
