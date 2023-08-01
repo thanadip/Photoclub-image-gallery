@@ -1,6 +1,8 @@
-import express from "express";
-import mysql from "mysql";
-import cors from "cors";
+const express = require("express");
+const mysql = require("mysql");
+const cors = require("cors");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const port = 5001;
 
@@ -21,6 +23,12 @@ db.connect((err) => {
   console.log('Database connected successfully');
 });
 
+
+app.listen(port, () => {
+  console.log("Backend connected");
+});
+
+
 app.use(express.json());
 app.use(cors());
 
@@ -28,12 +36,53 @@ app.get("/", (req, res) => {
   res.json("hello this is the backend ");
 });
 
-app.get("/user", (req, res) => {
-  const q = "SELECT * FROM users";
-  db.query(q, (err, data) => {
-    if (err) return res.json(err);
-    return res.json(data);
-  });
+function generateToken(user) {
+  const token = jwt.sign({ id: user.id, username: user.username }, 'secret_key', { expiresIn: '1h' });
+  return token;
+}
+
+
+app.post('/login', async (req ,res) => {
+
+  const {username, password } = req.body;
+
+  try {
+    const existingUser = await new Promise((resolve, reject)=>{
+
+      db.query('SELECT * FROM users WHERE username = ?',[username],(err,data)=>{
+
+        if(err) reject(err);
+        else resolve(data);
+
+      });
+    })
+
+    if (existingUser.length === 0){
+      return res.status(401).json({message:'Invalid inputs'});
+    }
+
+    const storedPassword = existingUser[0].password;
+    bcrypt.compare(password,storedPassword ,(err,result) => {
+
+      if(err || !result){
+        return res.status(401).json({ message: 'Invalid inputs' });
+      }
+
+      const user = {
+        id: existingUser[0].id,
+        username: existingUser[0].username,
+        user_email: existingUser[0].user_email,
+      };
+      const token = generateToken(user);
+      return res.status(200).json({ message: 'Login successful', token: token });
+
+    })
+
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
 });
 
 app.post('/register', async (req, res) => {
@@ -52,15 +101,22 @@ app.post('/register', async (req, res) => {
       return res.status(409).json({ message: 'Email already registered' });
     }
 
-    // Save the user information to the database
-    await new Promise((resolve, reject) => {
-      db.query('INSERT INTO users (username, user_email, password) VALUES (?, ?, ?)', [username, user_email, password], (err, result) => {
-        if (err) reject(err);
-        else resolve(result);
-      });
-    });
+    // Hash the password before saving it in the database
+    bcrypt.hash(password, 10, async (err, hashedPassword) => {
+      if (err) {
+        return res.status(500).json({ message: 'Error while hashing password' });
+      }
 
-    res.status(201).json({ message: 'Registration successful' });
+      // Save the user information (including the hashed password) to the database
+      await new Promise((resolve, reject) => {
+        db.query('INSERT INTO users (username, user_email, password) VALUES (?, ?, ?)', [username, user_email, hashedPassword], (err, result) => {
+          if (err) reject(err);
+          else resolve(result);
+        });
+      });
+
+      res.status(201).json({ message: 'Registration successful' });
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal server error' });
@@ -68,6 +124,3 @@ app.post('/register', async (req, res) => {
 });
 
 
-app.listen(port, () => {
-  console.log("Backend connected");
-});

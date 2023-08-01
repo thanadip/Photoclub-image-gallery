@@ -1,46 +1,86 @@
-import { Button, Card, Flex, FormControl, FormLabel, Input, Text } from '@chakra-ui/react'
-import React from 'react'
-import { Link } from 'react-router-dom'
-
-const handleButtonClick = ()=>{
-  alert('hello bitchass')
-}
+import { Button, Card, Flex, FormControl, FormLabel, Input, Text } from '@chakra-ui/react';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function Login() {
-  return (
-    <Flex h={'100dvh'}justifyContent={'center'} bg={'black'}>
-      <Card my={'auto'}  justify={'center'} padding={'2.5vw'}>
-        <Flex flexDirection={'column'}>
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
+
+  const handleButtonClick = async () => {
   
-        <Text textAlign={'center'} fontSize={'2xl'}>Member Login</Text>
-        
-        <FormControl padding={'1vw'} isRequired>
+    try {
+      
+      const response = await axios.post('http://localhost:5001/login',{
+      
+      username,
+      password,
 
-          <FormLabel padding={'0.5vh'}>Username</FormLabel>
-          <Input placeholder='Username' marginBottom={'1vw'}/>
+      });
 
-          <FormLabel>Password</FormLabel>
-          <Input placeholder='Password' />
+      if(response.status === 200){
+        alert('Login successful!');
+        navigate('/index');
+      }else{
+        alert('Login failed');
+      }
 
-          <Flex justifyContent={'center'} mt={'4'} flexDirection={'column'}>
 
-          <Button colorScheme="teal" size="md" onClick={handleButtonClick}>
-                login
-          </Button>
+    } catch (error) {
+      console.log(error);
+      alert('An error occurred. Please try again later.');
+    }
 
-          <Text fontSize={'1xl'} textAlign={'center'} mt={2}>
-            Don't have an account?{' '}
-            <Text color={'teal.500'} textDecoration={'underline'} as={Link} to='/register'> Register now </Text>
+  };
+
+  return (
+    <Flex h={'100dvh'} justifyContent={'center'} bg={'black'}>
+      <Card my={'auto'} justify={'center'} padding={'2.5vw'}>
+        <Flex flexDirection={'column'}>
+          <Text textAlign={'center'} fontSize={'2xl'}>
+            Login
           </Text>
 
-          </Flex>
-        </FormControl>
-        
+          <FormControl padding={'1vw'} isRequired>
+            <FormLabel padding={'0.5vh'}>Username</FormLabel>
+            <Input
+              placeholder='Username'
+              marginBottom={'1vw'}
+              type='text'
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+
+            <FormLabel>Password</FormLabel>
+            <Input
+              placeholder='Password'
+              type='password'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+
+            <Flex justifyContent={'center'} mt={'4'} flexDirection={'column'}>
+              <Button colorScheme='teal' size='md' onClick={handleButtonClick}>
+                login
+              </Button>
+
+              {errorMessage && <Text fontSize={'1xl'} color={'red'} textAlign={'center'} mt={2}>{errorMessage}</Text>}
+
+              <Text fontSize={'1xl'} textAlign={'center'} mt={2}>
+                Don't have an account?{' '}
+                <Text color={'teal.500'} textDecoration={'underline'} as={Link} to='/register'>
+                  {' '}
+                  Register now{' '}
+                </Text>
+              </Text>
+            </Flex>
+          </FormControl>
         </Flex>
-        
       </Card>
     </Flex>
-  )
+  );
 }
 
-export default Login
+export default Login;
