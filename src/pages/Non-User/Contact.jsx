@@ -1,5 +1,5 @@
 import React from 'react'
-import Navbar from '../components/Navbar'
+import Navbar from '../../components/Navbar'
 import { Stack, Card, Flex, Text, Box } from '@chakra-ui/react'
 
 function contact() {

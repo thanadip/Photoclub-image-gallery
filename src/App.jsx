@@ -8,15 +8,18 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 //components
 
 //pages
-import Start from "./pages/Start";
-import Contact from "./pages/Contact";
-import About from "./pages/About";
-import Register from "./pages/Register";
-import Login from "./pages/Login";
-import Index from "./pages/Index";
-import UserHome from "./pages/UserHome";
-import AdminHome from "./pages/AdminHome";
-import Blocked from "./pages/Blocked";
+import Start from "./pages/Non-User/Start";
+import Contact from "./pages/Non-User/Contact";
+import About from "./pages/Non-User/About";
+import Register from "./pages/Non-User/Register";
+import Login from "./pages/Non-User/Login";
+import Index from "./pages/Non-User/Index";
+import UserHome from "./pages/User/UserHome";
+import AdminHome from "./pages/Admin/AdminHome";
+import Blocked from "./pages/Non-User/Blocked";
+import AdminContact from "./pages/Admin/AdminContact";
+import UserContact from "./pages/User/UserContact";
+
 
 function App() {
   return (
@@ -31,6 +34,8 @@ function App() {
         <Route path="/user" element={<UserHome />}/>
         <Route path="/admin" element={<AdminHome />}/>
         <Route path="/blocked" element={<Blocked />}/>
+        <Route path="/adminContact" element={<AdminContact />}/>
+        <Route path="/userContact" element={<UserContact />}/>
       </Routes>
     </BrowserRouter>
   );

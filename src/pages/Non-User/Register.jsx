@@ -30,6 +30,12 @@ function Register() {
   const handleRegister = async () => {
 
     try {
+
+      if(!username || !password || !confirmPassword || !email || !phoneNumber){
+        alert('Some field is missing please check');
+        return;
+      }
+
       if (password !== confirmPassword) {
         alert('Passwords do not match');
         return;

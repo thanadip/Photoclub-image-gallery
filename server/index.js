@@ -93,6 +93,10 @@ app.post('/register', async (req, res) => {
   try {
     const { username, user_email, password } = req.body;
 
+    if (!username || !user_email || !password) {
+      return res.status(400).json({ message: 'missing required field' });
+    }
+
     // Check if the email already exists
     const existingUser = await new Promise((resolve, reject) => {
       db.query('SELECT * FROM users WHERE user_email = ?', [user_email], (err, data) => {
