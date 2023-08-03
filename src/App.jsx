@@ -19,6 +19,7 @@ import AdminHome from "./pages/Admin/AdminHome";
 import Blocked from "./pages/Non-User/Blocked";
 import AdminContact from "./pages/Admin/AdminContact";
 import UserContact from "./pages/User/UserContact";
+import AdminUsers from "./pages/Admin/AdminUsers";
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
         <Route path="/blocked" element={<Blocked />}/>
         <Route path="/adminContact" element={<AdminContact />}/>
         <Route path="/userContact" element={<UserContact />}/>
+        <Route path="/user-display" element={<AdminUsers />}/>
       </Routes>
     </BrowserRouter>
   );
