@@ -33,19 +33,41 @@ function AdminUsers() {
       .catch((error) => console.error('Error deleting user:', error));
   };
 
+  const updateUserType = (userId, userType) => {
+    // Make a PUT request to update the user_type_id for the user with the given userId
+    fetch(`http://localhost:5001/users/${userId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ user_type_id: userType }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          // If the update was successful, update the users state with the updated user
+          setUsers((prevUsers) =>
+            prevUsers.map((user) =>
+              user.user_id === userId ? { ...user, user_type_id: userType } : user
+            )
+          );
+        } else {
+          console.error('Failed to update user type');
+        }
+      })
+      .catch((error) => console.error('Error updating user type:', error));
+  };
+
   const handlePromote = (userId) => {
-    // Implement promote functionality here based on the userId
-    console.log(`Promoting user with ID: ${userId}`);
+    updateUserType(userId, 2);
   };
 
   const handleDemote = (userId) => {
-    // Implement demote functionality here based on the userId
-    console.log(`Demoting user with ID: ${userId}`);
+    updateUserType(userId, 1);
   };
 
-  const handleBan = (userId) =>{
-    alert(`User : ${userId} was banned!`);
-  }
+  const handleBan = (userId) => {
+    updateUserType(userId, 0);
+  };
 
   return (
     <>
