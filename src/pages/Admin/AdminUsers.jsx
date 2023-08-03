@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Flex, Box, Text, Card, Stack, TableContainer, Table, Thead, Tr, Th, Tbody, Td, Button } from '@chakra-ui/react';
+import AdminNavbar from '../../components/AdminNavbar';
 
 function AdminUsers() {
   const [users, setUsers] = useState([]);
@@ -71,6 +72,7 @@ function AdminUsers() {
 
   return (
     <>
+        <AdminNavbar/>
       <Text fontSize={'4xl'}>Edit user permissions</Text>
       <TableContainer>
         <Table variant={'striped'} colorScheme='teal'>
@@ -96,10 +98,10 @@ function AdminUsers() {
                 <Td>{user.created_at}</Td>
                 <Td>
                   <Button colorScheme="green" mr={2} onClick={() => handlePromote(user.user_id)}>
-                    Promote
+                    Set admin
                   </Button>
                   <Button colorScheme="blue" mr={2} onClick={() => handleDemote(user.user_id)}>
-                    Demote
+                    Set user
                   </Button>
                   <Button colorScheme="red" mr={2} onClick={() => handleDelete(user.user_id)}>
                     Delete

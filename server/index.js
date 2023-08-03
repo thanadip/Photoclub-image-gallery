@@ -181,12 +181,14 @@ app.delete("/users/:userId", async (req, res) => {
 
 app.put("/users/:userId", async (req, res) => {
   const userID = req.params.userId;
-  const sql = 'UPDATE users SET user_type_id = 2 WHERE user_id = ?';
+  const userType = req.body.user_type_id;
+
+  const sql = 'UPDATE users SET user_type_id = ? WHERE user_id = ?';
 
   try {
-    db.query(sql, [userID], (err, result) => {
+    db.query(sql, [userType, userID], (err, result) => {
       if (err) {
-        console.error('Error deleting user:', err);
+        console.error('Error updating user:', err);
         return res.status(500).json({ message: 'Internal server error' });
       }
 
@@ -194,13 +196,14 @@ app.put("/users/:userId", async (req, res) => {
         return res.status(404).json({ message: 'User not found' });
       }
 
-      return res.status(200).json({ message: 'User promoted successfully' });
+      return res.status(200).json({ message: 'User updated successfully' });
     });
   } catch (error) {
-    console.error('Error deleting user:', error);
+    console.error('Error updating user:', error);
     res.status(500).json({ message: 'Internal server error' });
   }
 });
+
 
 
 
