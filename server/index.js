@@ -203,8 +203,7 @@ app.put("/users/:userId", async (req, res) => {
   }
 });
 
-app.post('/images', upload.array('images'), async (req, res) => {
-  
+app.post('/upload-images', upload.array('images'), async (req, res) => {
   try {
     if (!req.files || req.files.length === 0) {
       return res.status(400).json({ message: 'No images provided' });
@@ -213,7 +212,7 @@ app.post('/images', upload.array('images'), async (req, res) => {
     const insertPromises = req.files.map((image) => {
       const image_data = image.buffer;
       return new Promise((resolve, reject) => {
-        db.query('INSERT INTO pic_name (pic_name) VALUES ?', [image_data], (err, result) => {
+        db.query('INSERT INTO pictures (pic_name) VALUES (?)', [image_data], (err, result) => {
           if (err) {
             reject(err);
           } else {
@@ -231,6 +230,25 @@ app.post('/images', upload.array('images'), async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 });
+
+
+app.get('/display-images', async (req, res) => {
+  try {
+    db.query('SELECT pic_name FROM pictures', (err, results) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ message: 'Internal server error' });
+      }
+
+      const images = results.map((row) => ({ pic_name: row.pic_name.toString('base64') }));
+      res.status(200).json(images);
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
 
 
 

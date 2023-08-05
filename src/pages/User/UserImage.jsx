@@ -12,7 +12,7 @@ function UserImage() {
 
   const fetchUploadedImages = async () => {
     try {
-      const response = await fetch('http://localhost:5001/images'); 
+      const response = await fetch('http://localhost:5001/display-images'); 
       if (response.ok) {
         const images = await response.json();
         setUploadedImages(images);
@@ -31,7 +31,7 @@ function UserImage() {
     });
 
     try {
-      const response = await fetch('/images', {
+      const response = await fetch('http://localhost:5001/upload-images', {
         method: 'POST',
         body: formData,
       });
@@ -60,9 +60,9 @@ function UserImage() {
         {selectedImages.map((image, index) => (
           <Image key={index} src={URL.createObjectURL(image)} alt={`Selected ${index}`} />
         ))}
-        {uploadedImages.map((image, index) => (
-          <Image key={index} src={`data:image/png;base64,${image.pic_name.toString('base64')}`} alt={`Uploaded ${index}`} />
-        ))}
+{uploadedImages.map((image, index) => (
+        <Image key={index} src={`data:image/png;base64,${image.pic_name}`} alt={`Uploaded ${index}`} />
+      ))}
       </Flex>
     </>
   );
