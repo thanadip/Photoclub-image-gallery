@@ -20,6 +20,7 @@ import Blocked from "./pages/Non-User/Blocked";
 import AdminContact from "./pages/Admin/AdminContact";
 import UserContact from "./pages/User/UserContact";
 import AdminUsers from "./pages/Admin/AdminUsers";
+import UserImage from "./pages/User/UserImage";
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
         <Route path="/adminContact" element={<AdminContact />}/>
         <Route path="/userContact" element={<UserContact />}/>
         <Route path="/user-display" element={<AdminUsers />}/>
+        <Route path="/image-display" element={<UserImage />}/>
       </Routes>
     </BrowserRouter>
   );

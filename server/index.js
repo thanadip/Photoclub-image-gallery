@@ -3,7 +3,9 @@ const mysql = require("mysql");
 const cors = require("cors");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { flexbox } = require("@chakra-ui/react");
+const multer = require('multer');
+const storage = multer.memoryStorage();
+const upload = multer({ storage, limits: { fileSize: 10 * 1024 * 1024 }, });
 
 const port = 5001;
 
@@ -24,11 +26,9 @@ db.connect((err) => {
   console.log('Database connected successfully');
 });
 
-
 app.listen(port, () => {
   console.log("Backend connected");
 });
-
 
 app.use(express.json());
 app.use(cors());
@@ -41,7 +41,6 @@ function generateToken(user) {
   const token = jwt.sign({ id: user.id, username: user.username }, 'secret_key', { expiresIn: '1h' });
   return token;
 }
-
 
 app.post('/login', async (req ,res) => {
 
@@ -203,6 +202,36 @@ app.put("/users/:userId", async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 });
+
+app.post('/images', upload.array('images'), async (req, res) => {
+  
+  try {
+    if (!req.files || req.files.length === 0) {
+      return res.status(400).json({ message: 'No images provided' });
+    }
+
+    const insertPromises = req.files.map((image) => {
+      const image_data = image.buffer;
+      return new Promise((resolve, reject) => {
+        db.query('INSERT INTO pic_name (pic_name) VALUES ?', [image_data], (err, result) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(result);
+          }
+        });
+      });
+    });
+
+    await Promise.all(insertPromises);
+
+    res.status(201).json({ message: 'Images uploaded successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
 
 
 

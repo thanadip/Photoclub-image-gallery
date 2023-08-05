@@ -19,6 +19,9 @@ function Navbar() {
             <Link to = '/userContact'>
             <Text mx={2}>Contact</Text>
             </Link>
+            <Link to = '/image-display'>
+            <Text mx={2}>Image</Text>
+            </Link>
             <Link to = '/login'>
             <Text mx={2}>Log-out</Text>
             </Link>
