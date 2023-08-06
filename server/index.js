@@ -4,8 +4,7 @@ const cors = require("cors");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const multer = require('multer');
-const storage = multer.memoryStorage();
-const upload = multer({ storage, limits: { fileSize: 10 * 1024 * 1024 }, });
+
 
 const port = 5001;
 
@@ -203,13 +202,16 @@ app.put("/users/:userId", async (req, res) => {
   }
 });
 
+const storage = multer.memoryStorage();
+const upload = multer({ storage, limits: { fileSize: 30 * 1024 * 1024 }, });
+
 app.post('/upload-images', upload.array('images'), async (req, res) => {
   try {
     if (!req.files || req.files.length === 0) {
       return res.status(400).json({ message: 'No images provided' });
     }
 
-    const insertPromises = req.files.map((image) => {
+    const insertedImages = req.files.map((image) => {
       const image_data = image.buffer;
       return new Promise((resolve, reject) => {
         db.query('INSERT INTO pictures (pic_name) VALUES (?)', [image_data], (err, result) => {
@@ -222,7 +224,7 @@ app.post('/upload-images', upload.array('images'), async (req, res) => {
       });
     });
 
-    await Promise.all(insertPromises);
+    await Promise.all(insertedImages);
 
     res.status(201).json({ message: 'Images uploaded successfully' });
   } catch (error) {

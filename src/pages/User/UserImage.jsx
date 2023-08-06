@@ -40,10 +40,12 @@ function UserImage() {
         setSelectedImages([]);
         fetchUploadedImages();
       } else {
-        // Handle error during image upload.
+        
+        throw new Error('Images failed to upload. ');
+
       }
     } catch (error) {
-      // Handle fetch or other errors.
+      console.log('An error occurred:', error.message);
     }
   };
 
@@ -55,12 +57,15 @@ function UserImage() {
     <>
       <UserNavbar />
       <Flex direction="column" align="center">
+
         <Input type="file" multiple onChange={handleImageSelection} />
+
         <Button onClick={handleImageUpload}>Upload Images</Button>
+        
         {selectedImages.map((image, index) => (
           <Image key={index} src={URL.createObjectURL(image)} alt={`Selected ${index}`} />
         ))}
-{uploadedImages.map((image, index) => (
+        {uploadedImages.map((image, index) => (
         <Image key={index} src={`data:image/png;base64,${image.pic_name}`} alt={`Uploaded ${index}`} />
       ))}
       </Flex>
