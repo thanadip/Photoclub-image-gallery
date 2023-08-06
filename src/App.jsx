@@ -21,6 +21,7 @@ import AdminContact from "./pages/Admin/AdminContact";
 import UserContact from "./pages/User/UserContact";
 import AdminUsers from "./pages/Admin/AdminUsers";
 import UserImage from "./pages/User/UserImage";
+import AdminImages from "./pages/Admin/AdminImages";
 
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
         <Route path="/userContact" element={<UserContact />}/>
         <Route path="/user-display" element={<AdminUsers />}/>
         <Route path="/image-display" element={<UserImage />}/>
+        <Route path="/admin-image" element={<AdminImages />}/>
       </Routes>
     </BrowserRouter>
   );
