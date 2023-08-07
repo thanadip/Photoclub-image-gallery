@@ -19,6 +19,9 @@ function Navbar() {
             <Link to = '/user-display'>
             <Text mx={2}>Permissions</Text>
             </Link>
+            <Link to = '/admin-image'>
+            <Text mx={2}>Upload image</Text>
+            </Link>
             <Link to = '/login'>
             <Text mx={2}>Log-out</Text>
             </Link>

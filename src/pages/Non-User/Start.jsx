@@ -7,8 +7,8 @@ function Start() {
     <Flex justifyContent='center' alignItems='center' height='100vh'>
       <Box width='60vw'>
         <Stack textAlign='center'>
-          <Text fontSize='6xl'>Patipon Sombat</Text>
-          <Text fontSize='5xl'>Commission gallery</Text>
+          <Text fontSize='6xl'>PSU Photo club </Text>
+          <Text fontSize='5xl'>Activity gallery</Text>
           <ButtonGroup spacing='4' mt='8' ml='auto' mr='auto'>
           <Link to ="/index">
           <Button colorScheme='teal' w='175px' h='50px'>
@@ -16,7 +16,7 @@ function Start() {
           </Button>
           </Link>
           <Text fontSize='15px' color='gray' mt='auto' mb='auto'>or</Text>
-          <Button as='a' href ='https://www.instagram.com/image_yoddoy.jpg/' target='_blank' color='#C13584' w='175px' h='50px' variant='outline'>
+          <Button as='a' href ='https://www.instagram.com/photoclub.psu/' target='_blank' color='#C13584' w='175px' h='50px' variant='outline'>
           <a class="fa fa-instagram"></a>
           &nbsp;Instagram
           </Button>

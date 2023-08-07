@@ -108,7 +108,7 @@ app.post('/register', async (req, res) => {
       return res.status(409).json({ message: 'Email already registered' });
     }
 
-    // Hash the password before saving it in the database
+    // Hash the password
     bcrypt.hash(password, 10, async (err, hashedPassword) => {
       if (err) {
         return res.status(500).json({ message: 'Error while hashing password' });
@@ -244,6 +244,38 @@ app.get('/display-images', async (req, res) => {
 
       const images = results.map((row) => ({ pic_name: row.pic_name.toString('base64') }));
       res.status(200).json(images);
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+app.get('/get-folder', async (req, res) => {
+  try {
+    db.query('SELECT folder_name FROM picture_folder', (err, results) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ message: 'Internal server error' });
+      }
+
+      res.status(200).json(results);
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+app.get('/get-year', async (req, res) => {
+  try {
+    db.query('SELECT year_name FROM years', (err, results) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ message: 'Internal server error' });
+      }
+
+      res.status(200).json(results);
     });
   } catch (error) {
     console.error(error);
