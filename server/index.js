@@ -330,6 +330,43 @@ app.post('/add-folder', async (req, res) => {
   }
 });
 
+app.get('/get-folders/:yearId', async (req, res) => {
+  try {
+    const yearId = req.params.yearId;
+
+    db.query('SELECT * FROM picture_folder WHERE year_id = ?', [yearId], (err, results) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ message: 'Internal server error' });
+      }
+
+      res.status(200).json(results);
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+app.get('/get-images/:folderId', async (req, res) => {
+  try {
+    const folderId = req.params.folderId;
+
+    db.query('SELECT picture_name FROM pictures WHERE folder_id = ?', [folderId], (err, results) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ message: 'Internal server error' });
+      }
+
+      res.status(200).json(results);
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+
 
 
 
