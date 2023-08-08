@@ -208,13 +208,15 @@ const upload = multer({ storage, limits: { fileSize: 30 * 1024 * 1024 }, });
 app.post('/upload-images', upload.array('images'), async (req, res) => {
   try {
     if (!req.files || req.files.length === 0) {
-      return res.status(400).json({ message: 'No images provided' });
+      return res.status(400).json({ message: 'No images included' });
     }
+
+    const folderId = req.header('X-Folder-ID');
 
     const insertedImages = req.files.map((image) => {
       const image_data = image.buffer;
       return new Promise((resolve, reject) => {
-        db.query('INSERT INTO pictures (pic_name) VALUES (?)', [image_data], (err, result) => {
+        db.query('INSERT INTO pictures (pic_name , folder_id) VALUES (? ,?)', [image_data , folderId], (err, result) => {
           if (err) {
             reject(err);
           } else {
@@ -253,7 +255,7 @@ app.get('/display-images', async (req, res) => {
 
 app.get('/get-folder', async (req, res) => {
   try {
-    db.query('SELECT folder_name FROM picture_folder', (err, results) => {
+    db.query('SELECT * FROM picture_folder', (err, results) => {
       if (err) {
         console.error(err);
         return res.status(500).json({ message: 'Internal server error' });
@@ -269,7 +271,7 @@ app.get('/get-folder', async (req, res) => {
 
 app.get('/get-year', async (req, res) => {
   try {
-    db.query('SELECT year_name FROM years', (err, results) => {
+    db.query('SELECT * FROM years', (err, results) => {
       if (err) {
         console.error(err);
         return res.status(500).json({ message: 'Internal server error' });
@@ -283,7 +285,50 @@ app.get('/get-year', async (req, res) => {
   }
 });
 
+app.post('/add-year', async (req, res) => {
+  try {
 
+    const { year_name } = req.body;
+
+    if (!year_name) {
+      return res.status(400).json({ message: 'missing required field' });
+    }
+
+    db.query('INSERT INTO years(year_name) VALUES (?)',[year_name], (err, results) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ message: 'Internal server error' });
+      }
+
+      res.status(200).json(results);
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+app.post('/add-folder', async (req, res) => {
+  try {
+    const { folder_name , year_id } = req.body;
+
+    if (!folder_name || !year_id) {
+      return res.status(400).json({ message: 'missing required field' });
+    }
+
+    db.query('INSERT INTO picture_folder (folder_name , year_id) VALUES (? ,?)', [folder_name , year_id], (err, results) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ message: 'Internal server error' });
+      }
+
+      res.status(200).json(results);
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
 
 
 

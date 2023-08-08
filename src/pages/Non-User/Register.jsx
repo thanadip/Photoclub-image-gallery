@@ -46,7 +46,6 @@ function Register() {
         user_email: email,
         password,
         phone_number: phoneNumber,
-        line_id: lineID,
       });
 
       if (response.status === 201) {
@@ -98,13 +97,13 @@ function Register() {
               <FormLabel fontSize={'2xl'}>Phone number</FormLabel>
               <Input type="text" placeholder="Phone number" value={phoneNumber} onChange={(e)=>setPhoneNumber(e.target.value)}/>
 
-              <Flex alignItems="baseline">
+              {/* <Flex alignItems="baseline">
                 <FormLabel fontSize={'2xl'}>Line ID</FormLabel>
                 <Text color="gray.500" fontSize="xl">
                   (optional)
                 </Text>
               </Flex>
-              <Input type="text" placeholder="Line ID" value={lineID} onChange={(e) => setLineID(e.target.value)} />
+              <Input type="text" placeholder="Line ID" value={lineID} onChange={(e) => setLineID(e.target.value)} /> */}
 
               <ButtonGroup>
 

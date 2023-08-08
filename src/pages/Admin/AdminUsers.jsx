@@ -18,6 +18,7 @@ function AdminUsers() {
     })
       .then((response) => {
         if (response.ok) {
+          
           // If the deletion was successful, update the users state by removing the deleted user
           setUsers((prevUsers) => prevUsers.filter((user) => user.user_id !== userId));
 
@@ -35,7 +36,6 @@ function AdminUsers() {
   };
 
   const updateUserType = (userId, userType) => {
-    // Make a PUT request to update the user_type_id for the user with the given userId
     fetch(`http://localhost:5001/users/${userId}`, {
       method: 'PUT',
       headers: {
@@ -45,7 +45,6 @@ function AdminUsers() {
     })
       .then((response) => {
         if (response.ok) {
-          // If the update was successful, update the users state with the updated user
           setUsers((prevUsers) =>
             prevUsers.map((user) =>
               user.user_id === userId ? { ...user, user_type_id: userType } : user

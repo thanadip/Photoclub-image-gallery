@@ -17,6 +17,7 @@ function AdminImages() {
     const [selectedImages, setSelectedImages] = useState([]);
     const [selectedFolder, setSelectedFolder] = useState([]);
     const [selectedFolderName, setSelectedFolderName] = useState(null);
+    const [selectedFolderId, setSelectedFolderId] =useState(null);
 
     const handleImageUpload = async () => {
       const formData = new FormData();
@@ -28,11 +29,17 @@ function AdminImages() {
         const response = await fetch('http://localhost:5001/upload-images', {
           method: 'POST',
           body: formData,
+          headers: {
+            'X-Folder-ID': selectedFolderId, 
+          },
         });
 
         if (response.ok) {
           setSelectedImages([]);
+
+          setSelectedFolderId(null);
           alert('Upload successful!');
+          window.location.reload();
         } else {
           throw new Error('Images failed to upload.');
         }
@@ -51,6 +58,7 @@ function AdminImages() {
         if (response.ok) {
           const folders = await response.json();
           setSelectedFolder(folders);
+          console.log(folders);
         } else {
           throw new Error('Failed to get folder names.');
         }
@@ -63,8 +71,10 @@ function AdminImages() {
       fetchFolderName();
     }, []);
 
-    const handleFolderSelection = (folderName) =>{
+    const handleFolderSelection = (folderName , folderId) =>{
       setSelectedFolderName(folderName);
+      setSelectedFolderId(folderId);
+      console.log('Selected Folder ID:', folderId);
     }
 
     return (
@@ -80,7 +90,7 @@ function AdminImages() {
             </MenuButton>
             <MenuList>
               {selectedFolder.map((folder, index) => (
-                <MenuItem key={index} onClick={() => handleFolderSelection(folder.folder_name)}>
+                <MenuItem key={index} onClick={() => handleFolderSelection(folder.folder_name , folder.folder_id)}>
                 {folder.folder_name}
               </MenuItem>
               ))}

@@ -22,6 +22,9 @@ function Navbar() {
             <Link to = '/admin-image'>
             <Text mx={2}>Upload image</Text>
             </Link>
+            <Link to = '/admin-folder'>
+            <Text mx={2}>Create folder</Text>
+            </Link>
             <Link to = '/login'>
             <Text mx={2}>Log-out</Text>
             </Link>
