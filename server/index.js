@@ -15,6 +15,14 @@ const db = mysql.createConnection({
   user: "root",
   password: "",
   database: "gallery",
+  connectTimeout: 20000,
+  multipleStatements: true, 
+  charset: "utf8mb4", 
+  bigNumberStrings: true, 
+  dateStrings: true, 
+  supportBigNumbers: true, 
+  typeCast: true,
+  maxAllowedPacket: 100 * 1024 * 1024,
 });
 
 db.connect((err) => {
@@ -215,8 +223,10 @@ app.post('/upload-images', upload.array('images'), async (req, res) => {
 
     const insertedImages = req.files.map((image) => {
       const image_data = image.buffer;
+      const insertQuery = 'INSERT INTO pictures (pic_name , folder_id) VALUES (?, ?)';
+      const insertValues = [image_data, folderId];
       return new Promise((resolve, reject) => {
-        db.query('INSERT INTO pictures (pic_name , folder_id) VALUES (? ,?)', [image_data , folderId], (err, result) => {
+        db.query(insertQuery, insertValues, (err, result) => {
           if (err) {
             reject(err);
           } else {
