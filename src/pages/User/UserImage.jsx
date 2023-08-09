@@ -27,37 +27,6 @@ function UserImage() {
     }
   };
 
-  // const handleImageUpload = async () => {
-  //   const formData = new FormData();
-  //   selectedImages.forEach((image) => {
-  //     formData.append('images', image);
-  //   });
-
-  //   try {
-  //     const response = await fetch('http://localhost:5001/upload-images', {
-  //       method: 'POST',
-  //       body: formData,
-  //     });
-
-  //     if (response.ok) {
-  //       setSelectedImages([]);
-  //       fetchUploadedImages();
-  //       alert('upload successfully!');
-  //     } else {
-        
-  //       alert('upload failed!');
-  //       throw new Error('Images failed to upload. ');
-
-  //     }
-  //   } catch (error) {
-  //     alert('something went wrong!');
-  //     console.log('An error occurred:', error.message);
-  //   }
-  // };
-
-  // const handleImageSelection = (e) => {
-  //   setSelectedImages(Array.from(e.target.files));
-  // };
 
   return (
     <>
