@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import UserNavbar from '../../components/UserNavbar';
-import { Flex, Input, Button, Image } from '@chakra-ui/react';
+import { Flex, Input, Button, Image, Center } from '@chakra-ui/react';
 
 function UserImage() {
   const [selectedImages, setSelectedImages] = useState([]);
@@ -31,7 +31,7 @@ function UserImage() {
   return (
     <>
       <UserNavbar />
-      <Flex direction="column" align="center">
+      <Flex direction="column" align="center" maxH={'200px'} maxW={'200px'} mx={'auto'}>
 
         {/* <Input type="file" multiple onChange={handleImageSelection} />
 

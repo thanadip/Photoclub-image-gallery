@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import UserNavbar from '../../components/UserNavbar';
 import axios from 'axios';
-import { Flex, List, ListItem, Text, Link, Image } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
+import { Flex, List, ListItem, Text, Image } from '@chakra-ui/react';
 
 function UserHome() {
 
   const [years , setYears] = useState([]);
+
+  const handleYearClick= (year_name) =>{
+
+    console.log(year_name)
+  }
 
   useEffect(() => {
     axios.get('http://localhost:5001/get-year')
@@ -25,7 +31,7 @@ function UserHome() {
         <List spacing="2">
           {years.map(year => (
             <ListItem key={year.year_id}>
-              <Text>{year.year_name}</Text>
+              <Text as={Link} to='/login' onClick={() => handleYearClick(year.year_name)}>{year.year_name}</Text>
             </ListItem>
           ))}
         </List>

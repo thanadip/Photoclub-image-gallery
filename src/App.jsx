@@ -23,6 +23,8 @@ import AdminUsers from "./pages/Admin/AdminUsers";
 import UserImage from "./pages/User/UserImage";
 import AdminImages from "./pages/Admin/AdminImages";
 import AdminFolders from "./pages/Admin/AdminFolders";
+import FolderYears from "./pages/Non-User/FolderYears";
+import ImageFolder from "./pages/Non-User/ImageFolder";
 
 
 function App() {
@@ -44,6 +46,8 @@ function App() {
         <Route path="/image-display" element={<UserImage />}/>
         <Route path="/admin-image" element={<AdminImages />}/>
         <Route path="/admin-folder" element={<AdminFolders />}/>
+        <Route path="/images/:yearId" element={<FolderYears />}/>
+        <Route path="/images/:yearId/:folderId" element={<ImageFolder />}/>
       </Routes>
     </BrowserRouter>
   );
