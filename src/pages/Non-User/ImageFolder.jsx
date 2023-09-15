@@ -1,39 +1,40 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../../components/Navbar';
 import axios from 'axios';
-import { Link, useParams ,useNavigate} from 'react-router-dom';
-import { Flex, Box, List, ListItem, Text } from '@chakra-ui/react';
+import { useParams, Link } from 'react-router-dom';
+import { Flex, List, ListItem, Text, Image } from '@chakra-ui/react';
 
-function FolderYears() {
-  const [folders, setFolders] = useState([]);
-  const { yearId } = useParams();
+function ImageFolder() {
+  const [images, setImages] = useState([]);
+  const { folderId } = useParams();
 
   useEffect(() => {
-    axios.get(`http://localhost:5001/get-folders/${yearId}`)
-      .then(response =>{
-        setFolders(response.data);
+    axios.get(`http://localhost:5001/get-images/${folderId}`)
+      .then(response => {
+        setImages(response.data);
+        console.log(response.data)
       })
       .catch(error => {
-        console.log(error);
-      })
-  }, [yearId]);
-  
+        console.error(error);
+      });
+  }, [folderId]);
 
   return (
     <>
       <Navbar />
       <Flex direction="column" align="center">
-        <Text fontSize="xl" fontWeight="bold" mb="2">List of Folders:</Text>
+        <Text fontSize="xl" fontWeight="bold" mb="2">List of Images:</Text>
         <List spacing="2">
-          {folders.map(folder => (
-            <ListItem key={folder.folder_id}>
-                <Text as={Link}> {folder.folder_name} </Text>
-            </ListItem>
-          ))}
+        {images.map((image, index) => (
+  <ListItem key={index}>
+    <Image src={`data:image/png;base64,${image.pic_name}`} alt={`Image ${index}`} />
+  </ListItem>
+))}
+
         </List>
       </Flex>
     </>
-  )
+  );
 }
 
-export default FolderYears;
+export default ImageFolder;

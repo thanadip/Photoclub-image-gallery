@@ -362,13 +362,14 @@ app.get('/get-images/:folderId', async (req, res) => {
   try {
     const folderId = req.params.folderId;
 
-    db.query('SELECT picture_name FROM pictures WHERE folder_id = ?', [folderId], (err, results) => {
+    db.query('SELECT pic_name FROM pictures WHERE folder_id = ?', [folderId], (err, results) => {
       if (err) {
         console.error(err);
         return res.status(500).json({ message: 'Internal server error' });
       }
 
-      res.status(200).json(results);
+      const images = results.map((row) => ({ pic_name: row.pic_name.toString('base64') }));
+      res.status(200).json(images);
     });
   } catch (error) {
     console.error(error);

@@ -16,6 +16,7 @@ function UserImage() {
       if (response.ok) {
         const images = await response.json();
         setUploadedImages(images);
+        console.log(images);
       } else {
         
         throw new Error('Images failed to upload. ');
@@ -26,7 +27,6 @@ function UserImage() {
       
     }
   };
-
 
   return (
     <>
@@ -40,6 +40,7 @@ function UserImage() {
         {selectedImages.map((image, index) => (
           <Image key={index} src={URL.createObjectURL(image)} alt={`Selected ${index}`} />
         ))} */}
+
         {uploadedImages.map((image, index) => (
         <Image key={index} src={`data:image/png;base64,${image.pic_name}`} alt={`Uploaded ${index}`} />
       ))}
