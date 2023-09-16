@@ -22,14 +22,15 @@ function ImageFolder() {
   return (
     <>
       <Navbar />
-      <Flex direction="column" align="center">
+      <Flex direction="column" align="center" maxH={"200px"} maxW={"200px"} mx={'auto'}>
         <Text fontSize="xl" fontWeight="bold" mb="2">List of Images:</Text>
         <List spacing="2">
-        {images.map((image, index) => (
-  <ListItem key={index}>
-    <Image src={`data:image/png;base64,${image.pic_name}`} alt={`Image ${index}`} />
-  </ListItem>
-))}
+
+          {images.map((image, index) => (
+          <ListItem key={index}>
+            <Image src={`data:image/png;base64,${image.pic_name}`} alt={`Image ${index}`} />
+          </ListItem>
+          ))}
 
         </List>
       </Flex>
