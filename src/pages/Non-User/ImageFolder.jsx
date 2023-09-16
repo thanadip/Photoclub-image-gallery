@@ -3,9 +3,6 @@ import Navbar from '../../components/Navbar';
 import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
 import { Flex, Text } from '@chakra-ui/react';
-import ReactImageGallery from 'react-image-gallery';
-import 'react-image-gallery/styles/css/image-gallery.css'; 
-import { object } from 'prop-types';
 
 
 function ImageFolder() {
@@ -35,13 +32,15 @@ function ImageFolder() {
       <Navbar />
       <Flex direction="column" align="center">
         <Text fontSize="xl" fontWeight="bold" mb="2">List of Images:</Text>
-        
+
         {isEmpty ? (
-          <Text> NO image display</Text>
+          <Text> No image display</Text>
         ) : (
-          <ReactImageGallery items={galleryImages} />
+          <Text> Some image display</Text>
         )
         }
+
+        
         
       </Flex>
     </>
