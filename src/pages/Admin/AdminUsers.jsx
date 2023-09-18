@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Flex, Box, Text, Card, Stack, TableContainer, Table, Thead, Tr, Th, Tbody, Td, Button } from '@chakra-ui/react';
-import AdminNavbar from '../../components/AdminNavbar';
+import UniversalNav from '../../components/UniversalNav';
 
 function AdminUsers() {
   const [users, setUsers] = useState([]);
@@ -71,7 +71,7 @@ function AdminUsers() {
 
   return (
     <>
-        <AdminNavbar/>
+        <UniversalNav/>
       <Text fontSize={'4xl'}>Edit user permissions</Text>
       <TableContainer>
         <Table variant={'striped'} colorScheme='teal'>

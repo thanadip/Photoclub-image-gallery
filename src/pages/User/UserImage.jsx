@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import UserNavbar from '../../components/UserNavbar';
+import UniversalNav from '../../components/UniversalNav';
 import { Flex, Input, Button, Image, Center } from '@chakra-ui/react';
 
 function UserImage() {
@@ -30,16 +30,8 @@ function UserImage() {
 
   return (
     <>
-      <UserNavbar />
+      <UniversalNav />
       <Flex direction="column" align="center" maxH={'200px'} maxW={'200px'} mx={'auto'}>
-
-        {/* <Input type="file" multiple onChange={handleImageSelection} />
-
-        <Button onClick={handleImageUpload}>Upload Images</Button>
-        
-        {selectedImages.map((image, index) => (
-          <Image key={index} src={URL.createObjectURL(image)} alt={`Selected ${index}`} />
-        ))} */}
 
         {uploadedImages.map((image, index) => (
         <Image key={index} src={`data:image/png;base64,${image.pic_name}`} alt={`Uploaded ${index}`} />

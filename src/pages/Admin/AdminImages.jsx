@@ -9,7 +9,7 @@ import {
   MenuList,
   MenuItem,
 } from '@chakra-ui/react';
-import AdminNavbar from '../../components/AdminNavbar';
+import UniversalNav from '../../components/UniversalNav';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 
 function AdminImages() {
@@ -79,7 +79,7 @@ function AdminImages() {
 
     return (
       <>
-        <AdminNavbar />
+        <UniversalNav />
         <Flex direction="column" align="center">
 
           <Input type="file" multiple onChange={handleImageSelection} />
