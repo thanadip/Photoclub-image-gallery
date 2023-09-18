@@ -3,6 +3,7 @@ import UserNavbar from '../../components/UserNavbar';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Flex, List, ListItem, Text, Image } from '@chakra-ui/react';
+import UniversalNav from '../../components/UniversalNav';
 
 function UserHome() {
 
@@ -26,6 +27,7 @@ function UserHome() {
   return (
     <>
       <UserNavbar />
+      <UniversalNav/>
       <Flex direction="column" align="center" mt="4">
         <Text fontSize="xl" fontWeight="bold" mb="2">List of Years:</Text>
         <List spacing="2">

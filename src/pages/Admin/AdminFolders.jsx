@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Flex, Input, Button, Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react';
-import AdminNavbar from '../../components/AdminNavbar';
+import UniversalNav from '../../components/UniversalNav';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import axios from 'axios';
 
@@ -96,7 +96,7 @@ function AdminFolders() {
 
     return (
         <>
-            <AdminNavbar />
+            <UniversalNav />
             <Flex direction="column" align="center">
                 <Input
                     placeholder="Enter folder name"

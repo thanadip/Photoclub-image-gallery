@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Box, Flex, Text } from "@chakra-ui/react";
 
-function Navbar() {
+function AdminNavbar() {
     return (
       <Box bg="teal" py={4}>
         <Flex px='10%' align="center" justify={'space-between'}>
@@ -34,4 +34,4 @@ function Navbar() {
     );
 }
 
-export default Navbar
+export default AdminNavbar
