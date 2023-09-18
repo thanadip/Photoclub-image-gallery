@@ -3,7 +3,6 @@ import Navbar from '../../components/Navbar';
 import axios from 'axios';
 import { Link , useNavigate} from 'react-router-dom';
 import { Flex, List, ListItem, Text } from '@chakra-ui/react';
-import FolderYears from './FolderYears';
 
 function UserHome() {
 

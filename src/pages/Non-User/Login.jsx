@@ -2,6 +2,7 @@ import { Button, Card, Flex, FormControl, FormLabel, Input, Text } from '@chakra
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -37,6 +38,8 @@ function Login() {
         }else{
           alert('wrong user type');
         }
+
+        Cookies.set("userRole", userType);
 
       }else{
         alert('Login failed');

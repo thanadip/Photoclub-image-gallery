@@ -4,7 +4,7 @@ const cors = require("cors");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const multer = require('multer');
-
+// const Cookies = require('js-cookie');
 
 const port = 5001;
 
