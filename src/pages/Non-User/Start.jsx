@@ -11,7 +11,7 @@ function Start() {
           <Text fontSize='5xl'>Activity gallery</Text>
           <ButtonGroup spacing='4' mt='8' ml='auto' mr='auto'>
           <Link to ="/index">
-          <Button colorScheme='teal' w='175px' h='50px'>
+          <Button bg='#2582FE' color='white' w='175px' h='50px'>
             Get Started
           </Button>
           </Link>

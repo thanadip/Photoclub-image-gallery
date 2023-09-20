@@ -1,13 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex, Img, Text } from "@chakra-ui/react";
 
 function Navbar() {
     return (
-      <Box bg="teal" py={4}>
+      <Box bg="#2582FE" py={4}>
         <Flex px='10%' align="center" justify={'space-between'}>
-        <Link to ="/about">
-          <Text fontSize="xl" fontWeight="bold">Logo</Text>
+        <Link to ="/index">
+          <Img src='src\assets\logo.jpg' boxSize={'40px'} borderRadius={'full'}></Img>
         </ Link>
           <Flex>
             <Link to={'/index'}>

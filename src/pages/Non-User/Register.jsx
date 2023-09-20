@@ -62,7 +62,7 @@ function Register() {
 
 
   return (
-    <Flex h={'100dvh'} justify={'center'} backgroundColor={'teal.400'}>
+    <Flex h={'100dvh'} justify={'center'} backgroundColor={'#307EE8'}>
       <Flex mr={'auto'}>
         <Stack my={'auto'} mx={'5vw'} pb={'10vw'}>
           <Text fontSize={'6xl'} textAlign={'left'}>
@@ -107,7 +107,7 @@ function Register() {
 
               <ButtonGroup>
 
-                <Button mt={4} colorScheme="teal" size="lg" onClick={handleRegister}>
+                <Button mt={4} bg="#2582FE" color={'white'} size="lg" onClick={handleRegister}>
                   Submit
                 </Button>
                 
@@ -120,7 +120,7 @@ function Register() {
               </ButtonGroup>
               
               <Text mt={'4'} textAlign={'center'}> already have an account?{' '}
-              <Text textDecoration="underline" color={"teal.500"} as={Link} to='/login'>Log in</Text> 
+              <Text textDecoration="underline" color={"#2582FE"} as={Link} to='/login'>Log in</Text> 
               </Text>
 
             </FormControl>

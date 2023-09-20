@@ -35,12 +35,12 @@ function UserHome() {
   return (
     <>
       <Navbar />
-      <Flex direction="column" align="center" mt="4">
-        <Text fontSize="xl" fontWeight="bold" mb="2">List of Years:</Text>
+      <Flex direction="column" align="left" bg={'gray'} mt='20dvh'>
+        <Text fontSize="xl" fontWeight="bold" mb="2">เลือกปีการศึกษา:</Text>
         <List spacing="2">
           {years.map(year => (
             <ListItem key={year.year_id}>
-              <Text as={Link} onClick={() => handleYearClick(year.year_id)} >{year.year_name}</Text>
+              <Text as={Link} onClick={() => handleYearClick(year.year_id)} > กิจกรรมในปีการศึกษา{year.year_name}</Text>
             </ListItem>
           ))}
         </List>
