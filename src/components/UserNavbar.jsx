@@ -7,7 +7,7 @@ function UserNavbar() {
       <Box bg="#2582FE" py={4}>
         <Flex px='10%' align="center" justify={'space-between'}>
         <Link to ="/about">
-        <Img src='src\assets\logo.jpg' boxSize={'40px'} borderRadius={'full'}></Img>
+        <Img src='src\assets\logo.jpg' boxSize={'40px'} borderRadius={'full'} ></Img>
         </ Link>
           <Flex>
             <Link to={'/user'}>

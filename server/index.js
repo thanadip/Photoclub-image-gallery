@@ -377,6 +377,32 @@ app.get('/get-images/:folderId', async (req, res) => {
   }
 });
 
+app.get('/get-thumbnail/:folderId', async (req, res) => {
+  try {
+    const folderId = req.params.folderId;
+
+    db.query('SELECT pic_name FROM pictures WHERE folder_id = ? LIMIT 1', [folderId], (err, result) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ message: 'Internal server error' });
+      }
+
+      if (result.length === 0) {
+        return res.status(404).json({ message: 'No images in the folder' });
+      }
+
+      const firstImage = result[0].pic_name.toString('base64');
+      res.status(200).json({ firstImage });
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+
+
+
 
 
 

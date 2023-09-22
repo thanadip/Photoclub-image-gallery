@@ -29,7 +29,7 @@ function UserHome() {
   return (
     <>
       <UniversalNav/>
-      <Flex direction="column" align="center" mt="4" bg={'black '}>
+      <Flex direction="column" align="center" mt="4" >
           <Text fontSize="xl" fontWeight="bold" mb="2">List of Years:</Text>
           <List spacing="2">
             {years.map(year => (

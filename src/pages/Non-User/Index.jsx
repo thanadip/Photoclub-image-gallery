@@ -35,7 +35,7 @@ function UserHome() {
   return (
     <>
       <Navbar />
-      <Flex direction="column" align="left" bg={'gray'} mt='20dvh'>
+      <Flex direction="column" align="left"  mt='4dvh'>
         <Text fontSize="xl" fontWeight="bold" mb="2">เลือกปีการศึกษา:</Text>
         <List spacing="2">
           {years.map(year => (
