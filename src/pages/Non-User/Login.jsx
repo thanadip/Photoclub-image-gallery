@@ -10,47 +10,39 @@ function Login() {
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
-  const handleButtonClick = async () => {
-  
+  const handleFormSubmit = async (e) => {
+    e.preventDefault(); 
     try {
-      
-      const response = await axios.post('http://localhost:5001/login',{
-
-      username,
-      password,
-
+      const response = await axios.post('http://localhost:5001/login', {
+        username,
+        password,
       });
 
-      
-      
       console.log('Response from backend:', response.data);
-      
+
       const userType = response.data.user_type_id;
 
-      if(response.status === 200 ){
+      if (response.status === 200) {
         console.log('User Type:', userType);
-        if(userType === 1){
+        if (userType === 1) {
           navigate('/user');
-        }else if(userType === 2 || userType === 3){
+        } else if (userType === 2 || userType === 3) {
           navigate('/admin');
-        }else if(userType === 0){
+        } else if (userType === 0) {
           navigate('/blocked');
-        }else{
-          alert('wrong user type');
+        } else {
+          setErrorMessage('Wrong user type');
         }
 
         Cookies.set("userRole", userType);
 
-      }else{
-        alert('Login failed');
+      } else {
+        setErrorMessage('Login failed');
       }
-
-
     } catch (error) {
       console.log(error);
-      alert('An error occurred. Please try again later.');
+      setErrorMessage('An error occurred. Please try again later.');
     }
-
   };
 
   return (
@@ -61,40 +53,46 @@ function Login() {
             Login
           </Text>
 
-          <FormControl padding={'1vw'} isRequired>
-            <FormLabel padding={'0.5vh'}>Username</FormLabel>
-            <Input
-              placeholder='Username'
-              marginBottom={'1vw'}
-              type='text'
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
+          <form onSubmit={handleFormSubmit}>
+            <FormControl padding={'1vw'} isRequired>
+              <FormLabel padding={'0.5vh'}>Username</FormLabel>
+              <Input
+                placeholder='Username'
+                marginBottom={'1vw'}
+                type='text'
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
 
-            <FormLabel>Password</FormLabel>
-            <Input
-              placeholder='Password'
-              type='password'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+              <FormLabel>Password</FormLabel>
+              <Input
+                placeholder='Password'
+                type='password'
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
 
-            <Flex justifyContent={'center'} mt={'4'} flexDirection={'column'}>
-              <Button colorScheme='teal' size='md' onClick={handleButtonClick}>
-                login
-              </Button>
+              <Flex justifyContent={'center'} mt={'4'} flexDirection={'column'}>
+                <Button colorScheme='teal' size='md' type='submit'>
+                  login
+                </Button>
 
-              {errorMessage && <Text fontSize={'1xl'} color={'red'} textAlign={'center'} mt={2}>{errorMessage}</Text>}
+                {errorMessage && (
+                  <Text fontSize={'1xl'} color={'red'} textAlign={'center'} mt={2}>
+                    {errorMessage}
+                  </Text>
+                )}
 
-              <Text fontSize={'1xl'} textAlign={'center'} mt={2}>
-                Don't have an account?{' '}
-                <Text color={'teal.500'} textDecoration={'underline'} as={Link} to='/register'>
-                  {' '}
-                  Register now{' '}
+                <Text fontSize={'1xl'} textAlign={'center'} mt={2}>
+                  Don't have an account?{' '}
+                  <Text color={'teal.500'} textDecoration={'underline'} as={Link} to='/register'>
+                    {' '}
+                    Register now{' '}
+                  </Text>
                 </Text>
-              </Text>
-            </Flex>
-          </FormControl>
+              </Flex>
+            </FormControl>
+          </form>
         </Flex>
       </Card>
     </Flex>
