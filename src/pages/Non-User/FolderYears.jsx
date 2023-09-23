@@ -26,10 +26,14 @@ function FolderYears() {
         .then((response) => {
           const firstImage = response.data.firstImage;
           folder.firstImage = firstImage;
-          setFolders([...folders]); // Update the state correctly
+          setFolders([...folders]); 
         })
         .catch((error) => {
-          console.log(error);
+          if (error.response && error.response.status === 404){
+            folder.firstImage = null;
+          }else{
+            console.log(error);
+          }
         });
     });
   }, [folders]);

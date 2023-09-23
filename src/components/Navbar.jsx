@@ -7,7 +7,8 @@ function Navbar() {
       <Box bg="#2582FE" py={4}>
         <Flex px='10%' align="center" justify={'space-between'}>
         <Link to ="/index">
-          <Img src='src\assets\logo.jpg' boxSize={'40px'} borderRadius={'full'}></Img>
+          {/* <Img src='src\assets\logo.jpg' boxSize={'40px'} borderRadius={'full'}></Img> */}
+        <Text> LOGO</Text>
         </ Link>
           <Flex>
             <Link to={'/index'}>
