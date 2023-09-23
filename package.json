@@ -22,7 +22,8 @@
     "react-audio-player": "^0.17.0",
     "react-dom": "^18.2.0",
     "react-photo-view": "^1.2.3",
-    "react-scripts": "^5.0.1"
+    "react-scripts": "^5.0.1",
+    "sweetalert2": "^11.7.28"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",
