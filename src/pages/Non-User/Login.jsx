@@ -37,8 +37,22 @@ function Login() {
 
         Cookies.set("userRole", userType);
 
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'login successfully',
+          showConfirmButton: false,
+          timer: 1000
+        })
+
       } else {
         setErrorMessage('Login failed');
+
+        Swal.fire({
+          icon: 'error',
+          title: 'Error!',
+          text: 'Failed to login :('
+        })
       }
     } catch (error) {
       console.log(error);
