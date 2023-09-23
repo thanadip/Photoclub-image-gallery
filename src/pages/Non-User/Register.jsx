@@ -3,19 +3,17 @@ import axios from 'axios';
 import { useState } from 'react';
 import { Link ,useNavigate } from 'react-router-dom';
 import {
-  Box,
   Card,
   Flex,
   Text,
   Stack,
   FormControl,
   FormLabel,
-  FormErrorMessage,
-  FormHelperText,
   Input,
   Button,
   ButtonGroup,
 } from '@chakra-ui/react';
+import Swal from 'sweetalert2';
 
 function Register() {
   const [username, setUsername] = useState('');
@@ -23,7 +21,6 @@ function Register() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [lineID, setLineID] = useState('');
 
   const navigate = useNavigate();
 
@@ -32,12 +29,20 @@ function Register() {
     try {
 
       if(!username || !password || !confirmPassword || !email || !phoneNumber){
-        alert('Some field is missing please check');
+        await Swal.fire({
+          icon: 'error',
+          title: 'Missing field!',
+          text: 'Missing field please check!'
+        })
         return;
       }
 
       if (password !== confirmPassword) {
-        alert('Passwords do not match');
+        await Swal.fire({
+          icon: 'error',
+          title: 'Check password!',
+          text: 'Password do not match!'
+        })
         return;
       }
 
@@ -49,14 +54,26 @@ function Register() {
       });
 
       if (response.status === 201) {
-        alert('Registration successful');
+        await Swal.fire({
+          icon: 'success',
+          title: 'Success!',
+          text: 'Registration successful'
+        })
         navigate('/login');
       } else {
-        alert('Registration failed');
+
+        await Swal.fire({
+          icon: 'error',
+          title: 'Error!',
+          text: 'Failed to registration'
+        })
       }
     } catch (error) {
-      console.error(error);
-      alert('An error occurred. Please try again later.');
+      await Swal.fire({
+        icon: 'error',
+        title: 'Error!',
+        text: 'Failed to registration'
+      })
     }
   };
 
@@ -96,14 +113,6 @@ function Register() {
 
               <FormLabel fontSize={'2xl'}>Phone number</FormLabel>
               <Input type="text" placeholder="Phone number" value={phoneNumber} onChange={(e)=>setPhoneNumber(e.target.value)}/>
-
-              {/* <Flex alignItems="baseline">
-                <FormLabel fontSize={'2xl'}>Line ID</FormLabel>
-                <Text color="gray.500" fontSize="xl">
-                  (optional)
-                </Text>
-              </Flex>
-              <Input type="text" placeholder="Line ID" value={lineID} onChange={(e) => setLineID(e.target.value)} /> */}
 
               <ButtonGroup>
 
