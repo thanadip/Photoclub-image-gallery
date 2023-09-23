@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import Swal from 'sweetalert2';
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -42,6 +43,12 @@ function Login() {
     } catch (error) {
       console.log(error);
       setErrorMessage('An error occurred. Please try again later.');
+      
+      Swal.fire({
+        icon: 'error',
+        title: 'Error!',
+        text: 'Wrong username or password'
+      })
     }
   };
 
