@@ -8,7 +8,6 @@ import Swal from 'sweetalert2';
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
   const handleFormSubmit = async (e) => {
@@ -18,8 +17,6 @@ function Login() {
         username,
         password,
       });
-
-      console.log('Response from backend:', response.data);
 
       const userType = response.data.user_type_id;
 
@@ -32,12 +29,12 @@ function Login() {
         } else if (userType === 0) {
           navigate('/blocked');
         } else {
-          setErrorMessage('Wrong user type');
+          navigate('/*');
         }
 
         Cookies.set("userRole", userType);
 
-        Swal.fire({
+        await Swal.fire({
           position: 'center',
           icon: 'success',
           title: 'login successfully',
@@ -46,9 +43,8 @@ function Login() {
         })
 
       } else {
-        setErrorMessage('Login failed');
 
-        Swal.fire({
+        await Swal.fire({
           icon: 'error',
           title: 'Error!',
           text: 'Failed to login :('
@@ -56,7 +52,6 @@ function Login() {
       }
     } catch (error) {
       console.log(error);
-      setErrorMessage('An error occurred. Please try again later.');
       
       Swal.fire({
         icon: 'error',
@@ -97,12 +92,6 @@ function Login() {
                 <Button colorScheme='teal' size='md' type='submit'>
                   login
                 </Button>
-
-                {errorMessage && (
-                  <Text fontSize={'1xl'} color={'red'} textAlign={'center'} mt={2}>
-                    {errorMessage}
-                  </Text>
-                )}
 
                 <Text fontSize={'1xl'} textAlign={'center'} mt={2}>
                   Don't have an account?{' '}
