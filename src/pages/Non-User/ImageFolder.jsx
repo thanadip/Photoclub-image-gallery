@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import Navbar from '../../components/Navbar';
-import axios from 'axios';
-import { useParams ,Link } from 'react-router-dom';
-import { Flex, List, ListItem, Text } from '@chakra-ui/react';
-import 'react-photo-view/dist/react-photo-view.css';
-import { PhotoProvider, PhotoView } from 'react-photo-view';
+import React, { useEffect, useState } from "react";
+import Navbar from "../../components/Navbar";
+import axios from "axios";
+import { useParams, Link } from "react-router-dom";
+import { Box, Card, Flex, Img, List, ListItem, Text } from "@chakra-ui/react";
+import "react-photo-view/dist/react-photo-view.css";
+import { PhotoProvider, PhotoView } from "react-photo-view";
 
 function ImageFolder() {
   const [images, setImages] = useState([]);
@@ -29,38 +29,38 @@ function ImageFolder() {
   return (
     <>
       <Navbar />
-      <Flex
-        direction="column"
-        align="center"
-        maxW="200px"
-        mx="auto"
-        p="4"
-      >
+      <Flex direction="column" align="center" p="4">
         <Text fontSize="xl" fontWeight="bold" mb="2">
           List of Images:
         </Text>
 
-        <PhotoProvider
-          currentIndex={currentImageIndex}
-          onClick={handleImageClick}
-          speed={() => 800}
-        >
-          <List spacing="4" as ={Link}>
+        <Flex flexWrap="wrap" justify="center">
+          <PhotoProvider
+            currentIndex={currentImageIndex}
+            onClick={handleImageClick}
+            speed={() => 800}
+          >
             {images.map((image, index) => (
-              <ListItem key={index}>
+              <Box
+                key={index}
+                padding="1rem"
+                textAlign="center"
+                maxWidth="200px"
+                maxH={""}
+              >
                 <PhotoView src={`data:image/png;base64,${image.pic_name}`}>
-                  <img
+                  <Img
                     src={`data:image/png;base64,${image.pic_name}`}
                     alt={`Image ${index}`}
-                    style={{ maxWidth: '100%', maxHeight: '400px', borderRadius: '8px' 
-                    }
-                  }
+                    padding="5px"
+                    borderRadius={"10px"}
+                    maxW="100%"
                   />
                 </PhotoView>
-              </ListItem>
+              </Box>
             ))}
-          </List>
-        </PhotoProvider>
+          </PhotoProvider>
+        </Flex>
       </Flex>
     </>
   );
