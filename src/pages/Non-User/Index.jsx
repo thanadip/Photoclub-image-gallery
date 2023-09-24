@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '../../components/Navbar';
 import axios from 'axios';
 import { Link , useNavigate} from 'react-router-dom';
-import { Flex, List, ListItem, Text } from '@chakra-ui/react';
+import { Flex, List, ListItem, Text , Card, CardBody, CardHeader, Heading, Stack, StackDivider, Box} from '@chakra-ui/react';
 
 function UserHome() {
 
@@ -16,7 +16,6 @@ function UserHome() {
       const data = await response.json();
       console.log('OK',data)
       navigate(`/images/${year_id}`);
-      // console.log(year_id) 
     } catch (error) {
       console.log('An error occurred: ', error)
     }
@@ -35,15 +34,29 @@ function UserHome() {
   return (
     <>
       <Navbar />
-      <Flex direction="column" align="left"  mt='4dvh'>
-        <Text fontSize="xl" fontWeight="bold" mb="2">เลือกปีการศึกษา:</Text>
-        <List spacing="2">
-          {years.map(year => (
-            <ListItem key={year.year_id}>
-              <Text as={Link} onClick={() => handleYearClick(year.year_id)} > กิจกรรมในปีการศึกษา{year.year_name}</Text>
-            </ListItem>
-          ))}
-        </List>
+      <Flex direction="column" align="left"  mt='8dvh' maxW={'40vw'}>
+
+<Card>
+  <CardHeader>
+    <Heading size='md'>เลือกปีการศึกษา:</Heading>
+  </CardHeader>
+
+  <CardBody >
+    <Stack divider={<StackDivider />} spacing='4' >
+      {years.map(year => (
+        <Box as={Link} onClick={() => handleYearClick(year.year_id)} _hover={{bgColor:'red'}} >
+        <Heading size='L' textTransform='uppercase'>
+          ปีการศึกษา {year.year_name}
+        </Heading>
+        <Text pt='2' fontSize='sm'>
+          รวมกิจกรรมในปีการศึกษา {year.year_name}
+        </Text>
+      </Box>
+      ))}
+      
+    </Stack>
+  </CardBody>
+</Card>
       </Flex>
     </>
   );
