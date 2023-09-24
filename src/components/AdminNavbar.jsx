@@ -21,10 +21,10 @@ function AdminNavbar() {
             <Text mx={2}>Permissions</Text>
             </Link>
             <Link to = '/admin-image'>
-            <Text mx={2}>Upload image</Text>
+            <Text mx={2}>Upload Image</Text>
             </Link>
             <Link to = '/admin-folder'>
-            <Text mx={2}>Create folder</Text>
+            <Text mx={2}>Create Album</Text>
             </Link>
             <Link to = '/login'>
             <Text mx={2}>Log-out</Text>
