@@ -47,7 +47,7 @@ function UserHome() {
   return (
     <>
       <Navbar />
-      <Flex direction="column" align="left" mt="8dvh" maxW={"40vw"}>
+      <Flex direction="column" align="left" mt="8dvh" maxW={"50vw"}>
         <Card>
           <CardHeader>
             <Heading size="md">เลือกปีการศึกษา:</Heading>
@@ -57,9 +57,13 @@ function UserHome() {
             <Stack divider={<StackDivider />} spacing="4">
               {years.map((year) => (
                 <Box
+                  key={`year-${year.year_id}`}
                   onClick={() => handleYearClick(year.year_id)}
-                  _hover={{ bgColor: "red" }}
+                  _hover={{ bgColor: "blue.100" }}
                   cursor={"pointer"}
+                  borderRadius={"md"}
+                  border={"1px"}
+                  borderColor={"gray.100"}
                 >
                   <Heading size="L" textTransform="uppercase">
                     ปีการศึกษา {year.year_name}
