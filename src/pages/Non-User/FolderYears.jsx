@@ -41,9 +41,9 @@ function FolderYears() {
   return (
     <>
       <UniversalNav />
-      <Flex direction="column" align="left" mt="4dvh">
+      <Flex direction="column" align="center" mt="4dvh">
         <Text fontSize="xl" fontWeight="bold" mb="2">
-          List of Folders:
+          List of Album:
         </Text>
         <Wrap spacing="2">
           {folders.map((folder) => (
@@ -63,7 +63,7 @@ function FolderYears() {
                     <Image
                       src={`data:image/jpeg;base64,${folder.firstImage}`}
                       alt={folder.folder_name}
-                      boxSize="100px"
+                      boxSize="200px"
                       objectFit="cover"
                       borderRadius="md"
                       mb="2"
