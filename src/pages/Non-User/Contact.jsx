@@ -1,11 +1,11 @@
 import React from "react";
-import Navbar from "../../components/Navbar";
+import UniversalNav from "../../components/UniversalNav";
 import { Stack, Card, Flex, Text, Box } from "@chakra-ui/react";
 
 function contact() {
   return (
     <>
-      <Navbar />
+      <UniversalNav />
 
       <Flex h={"100%"} direction={"column"} alignItems={"center"} mt={"100px"}>
         <Stack mx={"auto"} textAlign={"center"}>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "../../components/Navbar";
+import UniversalNav from "../../components/UniversalNav";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -46,7 +46,7 @@ function UserHome() {
 
   return (
     <>
-      <Navbar />
+      <UniversalNav />
       <Flex direction="column" align="left" mt="8dvh" maxW={"50vw"} ml={"2dvh"}>
         <Card>
           <CardHeader>

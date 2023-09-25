@@ -1,9 +1,8 @@
-import React from 'react'
+import React from "react";
+import UniversalNav from "../../components/UniversalNav";
 
 function Blocked() {
-  return (
-    <div>Blocked</div>
-  )
+  return <div>Blocked</div>;
 }
 
-export default Blocked
+export default Blocked;

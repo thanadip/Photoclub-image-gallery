@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import Navbar from '../../components/Navbar';
-import axios from 'axios';
-import { Link, useParams } from 'react-router-dom';
-import { Flex, Text, Box, Wrap, WrapItem, Image } from '@chakra-ui/react';
+import React, { useEffect, useState } from "react";
+import UniversalNav from "../../components/UniversalNav";
+import axios from "axios";
+import { Link, useParams } from "react-router-dom";
+import { Flex, Text, Box, Wrap, WrapItem, Image } from "@chakra-ui/react";
 
 function FolderYears() {
   const [folders, setFolders] = useState([]);
@@ -26,12 +26,12 @@ function FolderYears() {
         .then((response) => {
           const firstImage = response.data.firstImage;
           folder.firstImage = firstImage;
-          setFolders([...folders]); 
+          setFolders([...folders]);
         })
         .catch((error) => {
-          if (error.response && error.response.status === 404){
+          if (error.response && error.response.status === 404) {
             folder.firstImage = null;
-          }else{
+          } else {
             console.log(error);
           }
         });
@@ -40,7 +40,7 @@ function FolderYears() {
 
   return (
     <>
-      <Navbar />
+      <UniversalNav />
       <Flex direction="column" align="left" mt="4dvh">
         <Text fontSize="xl" fontWeight="bold" mb="2">
           List of Folders:
@@ -57,7 +57,7 @@ function FolderYears() {
                   borderWidth="1px"
                   borderRadius="md"
                   transition="transform 0.2s"
-                  _hover={{ transform: 'scale(1.05)' }}
+                  _hover={{ transform: "scale(1.05)" }}
                 >
                   {folder.firstImage && (
                     <Image
