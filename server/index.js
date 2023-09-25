@@ -310,11 +310,11 @@ app.post("/add-year", async (req, res) => {
     const { year_name } = req.body;
 
     if (!year_name) {
-      return res.status(400).json({ message: "missing required field" });
+      return res.status(400).json({ message: "Missing required field" });
     }
 
     db.query(
-      "INSERT INTO years(year_name) VALUES (?)",
+      "SELECT * FROM years WHERE year_name = ?",
       [year_name],
       (err, results) => {
         if (err) {
@@ -322,7 +322,24 @@ app.post("/add-year", async (req, res) => {
           return res.status(500).json({ message: "Internal server error" });
         }
 
-        res.status(200).json(results);
+        if (results.length > 0) {
+          return res.status(409).json({ message: "Year already exists" });
+        } else {
+          db.query(
+            "INSERT INTO years(year_name) VALUES (?)",
+            [year_name],
+            (err, insertResults) => {
+              if (err) {
+                console.error(err);
+                return res
+                  .status(500)
+                  .json({ message: "Internal server error" });
+              }
+
+              res.status(200).json(insertResults);
+            }
+          );
+        }
       }
     );
   } catch (error) {
