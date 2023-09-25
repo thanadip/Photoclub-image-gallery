@@ -11,12 +11,12 @@ function AdminNavbar() {
           <Text> LOGO</Text>
         </Link>
         <Flex>
-          <Link to={"/admin"}>
+          <Link to={"/Index"}>
             <Text mx={2}>Home</Text>
           </Link>
-          <Link to="/adminContact">
+          {/* <Link to="/adminContact">
             <Text mx={2}>Contact</Text>
-          </Link>
+          </Link> */}
           <Link to="/user-display">
             <Text mx={2}>Permissions</Text>
           </Link>

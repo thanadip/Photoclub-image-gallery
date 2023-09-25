@@ -11,16 +11,16 @@ function UserNavbar() {
           <Text> LOGO</Text>
         </Link>
         <Flex>
-          <Link to={"/user"}>
+          <Link to={"/Index"}>
             <Text mx={2}>Home</Text>
           </Link>
           <Link to={"/about"}>
             <Text mx={2}>About</Text>
           </Link>
-          <Link to="/userContact">
+          <Link to="/Contact">
             <Text mx={2}>Contact</Text>
           </Link>
-          <Link to="/image-display">
+          <Link to="/admin-image">
             <Text mx={2}>Image</Text>
           </Link>
           <Link to="/login">

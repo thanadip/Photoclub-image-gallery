@@ -48,13 +48,9 @@ function UserHome() {
   return (
     <>
       <UniversalNav />
-      <Flex
-        direction="column"
-        align="center"
-        mt="8dvh"
-      >
+      <Flex direction="column" align="center" mt="8dvh">
         <Center>
-          <Card w="100%"> 
+          <Card w="100%">
             <CardHeader>
               <Heading size="md">เลือกปีการศึกษา:</Heading>
             </CardHeader>
@@ -70,7 +66,7 @@ function UserHome() {
                     borderRadius={"md"}
                     border={"1px"}
                     borderColor={"gray.100"}
-                    w="100%" 
+                    w="100%"
                     p="4"
                     mb="4"
                   >
