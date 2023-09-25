@@ -1,6 +1,6 @@
 import React from "react";
 import UniversalNav from "../../components/UniversalNav";
-import { Stack, Card, Flex, Text, Box } from "@chakra-ui/react";
+import { Stack, Card, Flex, Text, Box, Img } from "@chakra-ui/react";
 
 function contact() {
   return (
@@ -24,13 +24,22 @@ function contact() {
         >
           <Card
             bg={""}
-            h={"300px"}
+            h={"350px"}
             w={"250px"}
             borderTop={"8px"}
             borderTopColor={"#1877f2"}
             _hover={{ transform: "scale(1.05)", transition: "transform 0.3s" }}
+            cursor={"pointer"}
           >
-            Facebook
+            <Text>Facebook</Text>
+            <Img
+              src="src\assets\facebookQR.png"
+              maxW={"70%"}
+              maxH={"70%"}
+              mx={"auto"}
+              my={"10px"}
+            ></Img>
+            <Text>ชมรมศิลปะการถ่ายภาพ มหาวิทยาลัยสงขลานครินทร์</Text>
           </Card>
 
           <Card
@@ -39,21 +48,39 @@ function contact() {
             w={"250px"}
             mt={"20px"}
             borderTop={"8px"}
-            borderTopColor={"gray"}
+            borderTopColor={"#C13584"}
             _hover={{ transform: "scale(1.05)", transition: "transform 0.3s" }}
+            cursor={"pointer"}
           >
-            Contact information
+            <Text>Instragram</Text>
+            <Img
+              src="src\assets\instragramQR.png"
+              maxW={"70%"}
+              maxH={"70%"}
+              mx={"auto"}
+              my={"10px"}
+            ></Img>
+            <Text>📸✨ชมรมศิลปะการถ่ายภาพ มหาวิทยาลัยสงขลานครินทร์</Text>
           </Card>
 
           <Card
             bg={""}
-            h={"300px"}
+            h={"350px"}
             w={"250px"}
             borderTop={"8px"}
             borderTopColor={"#00b900"}
             _hover={{ transform: "scale(1.05)", transition: "transform 0.3s" }}
+            cursor={"pointer"}
           >
-            Line
+            <Text>Line</Text>
+            <Img
+              src="src\assets\facebookQR.png"
+              maxW={"70%"}
+              maxH={"70%"}
+              mx={"auto"}
+              my={"10px"}
+            ></Img>
+            <Text>ชมรมศิลปะการถ่ายภาพ มหาวิทยาลัยสงขลานครินทร์</Text>
           </Card>
         </Flex>
       </Flex>
