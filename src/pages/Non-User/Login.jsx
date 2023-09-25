@@ -35,9 +35,9 @@ function Login() {
       if (response.status === 200) {
         console.log("User Type:", userType);
         if (userType === 1) {
-          navigate("/user");
+          navigate("/Index");
         } else if (userType === 2 || userType === 3) {
-          navigate("/admin");
+          navigate("/Index");
         } else if (userType === 0) {
           navigate("/blocked");
         } else {
