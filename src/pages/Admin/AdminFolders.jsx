@@ -1,5 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { Flex, Input, Button, Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react';
+import { 
+  Flex, 
+  Input, 
+  Button, 
+  Menu, 
+  MenuButton, 
+  MenuList, 
+  MenuItem, 
+  Box, 
+  Heading, 
+  Spacer, 
+  VStack, 
+  Container, 
+  Text,
+} from '@chakra-ui/react';
 import UniversalNav from '../../components/UniversalNav';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import axios from 'axios';
@@ -26,7 +40,7 @@ function AdminFolders() {
             })
 
             if (response.status === 200) {
-                alert('Added year successful!');
+                alert('Added year successfully!');
                 setYearName('');
                 window.location.reload();
             } else {
@@ -47,9 +61,8 @@ function AdminFolders() {
             if (response.ok) {
                 const years = await response.json();
                 setSelectedYear(years);
-                console.log(years);
             } else {
-                throw new Error('failed to get years name');
+                throw new Error('Failed to get year names');
             }
 
         } catch (error) {
@@ -64,7 +77,6 @@ function AdminFolders() {
     const handleYearSelection = (yearName, yearId) => {
         setSelectedYearName(yearName);
         setSelectedYearId(yearId);
-        console.log('Selected Year ID:', yearId);
     }
 
     const handleCreateFolder = async () =>{
@@ -81,7 +93,7 @@ function AdminFolders() {
             })
 
             if (response.status === 200) {
-                alert('Added folder successful!');
+                alert('Added folder successfully!');
                 setFolderName('');
                 window.location.reload();
             } else {
@@ -97,36 +109,42 @@ function AdminFolders() {
     return (
         <>
             <UniversalNav />
-            <Flex direction="column" align="center">
-                <Input
-                    placeholder="Enter folder name"
-                    type='text'
-                    value={folderName}
-                    onChange={(e) => setFolderName(e.target.value)}
-                />
-                <Button onClick={() => handleCreateFolder()}>Create Folder</Button>
-                <Menu>
-                    <MenuButton as={Button} rightIcon={<ChevronDownIcon />} >
-                    {selectedYearName ? selectedYearName : 'Select year'}
-                    </MenuButton>
-                    <MenuList>
-                        {selectedYear.map((year, index) => (
-                            <MenuItem key={index} onClick={() => handleYearSelection(year.year_name, year.year_id)}>
-                                {year.year_name}
-                            </MenuItem>
-                        ))}
-                    </MenuList>
-                </Menu>
-
-                <Input
-                    placeholder="Enter year name"
-                    type="text"
-                    value={yearName}
-                    onChange={(e) => setYearName(e.target.value)}
-                />
-                <Button onClick={handleCreateYear}>Create Year</Button>
-            </Flex>
-
+            <Container maxW="container.md" mt="4">
+                <Heading mb="4">Create New Albums</Heading>
+                <VStack align="start" spacing="4">
+                    <Text>Create a new album within an existing year:</Text>
+                    <Menu>
+                        <MenuButton as={Button} rightIcon={<ChevronDownIcon />} >
+                            {selectedYearName ? selectedYearName : 'Select year'}
+                        </MenuButton>
+                        <MenuList>
+                            {selectedYear.map((year, index) => (
+                                <MenuItem key={index} onClick={() => handleYearSelection(year.year_name, year.year_id)}>
+                                    {year.year_name}
+                                </MenuItem>
+                            ))}
+                        </MenuList>
+                    </Menu>
+                    <Input
+                        placeholder="Enter folder name"
+                        type='text'
+                        value={folderName}
+                        onChange={(e) => setFolderName(e.target.value)}
+                    />
+                    <Button onClick={handleCreateFolder}>Create Album</Button>
+                </VStack>
+                <Spacer mt="4" />
+                <VStack align="start" spacing="4">
+                    <Text>Create a new year:</Text>
+                    <Input
+                        placeholder="Enter year name"
+                        type="text"
+                        value={yearName}
+                        onChange={(e) => setYearName(e.target.value)}
+                    />
+                    <Button onClick={handleCreateYear}>Create Year</Button>
+                </VStack>
+            </Container>
         </>
     );
 }
