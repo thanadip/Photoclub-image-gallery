@@ -14,6 +14,7 @@ import {
   Stack,
   StackDivider,
   Box,
+  Center,
 } from "@chakra-ui/react";
 
 function UserHome() {
@@ -47,35 +48,44 @@ function UserHome() {
   return (
     <>
       <UniversalNav />
-      <Flex direction="column" align="left" mt="8dvh" maxW={"50vw"} ml={"2dvh"}>
-        <Card>
-          <CardHeader>
-            <Heading size="md">เลือกปีการศึกษา:</Heading>
-          </CardHeader>
+      <Flex
+        direction="column"
+        align="center"
+        mt="8dvh"
+      >
+        <Center>
+          <Card w="100%"> 
+            <CardHeader>
+              <Heading size="md">เลือกปีการศึกษา:</Heading>
+            </CardHeader>
 
-          <CardBody>
-            <Stack divider={<StackDivider />} spacing="4">
-              {years.map((year, index) => (
-                <Box
-                  key={index}
-                  onClick={() => handleYearClick(year.year_id)}
-                  _hover={{ bgColor: "blue.100" }}
-                  cursor={"pointer"}
-                  borderRadius={"md"}
-                  border={"1px"}
-                  borderColor={"gray.100"}
-                >
-                  <Heading size="L" textTransform="uppercase">
-                    ปีการศึกษา {year.year_name}
-                  </Heading>
-                  <Text pt="2" fontSize="sm">
-                    รวมกิจกรรมในปีการศึกษา {year.year_name}
-                  </Text>
-                </Box>
-              ))}
-            </Stack>
-          </CardBody>
-        </Card>
+            <CardBody>
+              <Stack divider={<StackDivider />} spacing="4">
+                {years.map((year, index) => (
+                  <Box
+                    key={index}
+                    onClick={() => handleYearClick(year.year_id)}
+                    _hover={{ bgColor: "blue.100" }}
+                    cursor={"pointer"}
+                    borderRadius={"md"}
+                    border={"1px"}
+                    borderColor={"gray.100"}
+                    w="100%" 
+                    p="4"
+                    mb="4"
+                  >
+                    <Heading size="L" textTransform="uppercase">
+                      ปีการศึกษา {year.year_name}
+                    </Heading>
+                    <Text pt="2" fontSize="sm">
+                      ประมวลภาพกิจกรรมในปีการศึกษา {year.year_name}
+                    </Text>
+                  </Box>
+                ))}
+              </Stack>
+            </CardBody>
+          </Card>
+        </Center>
       </Flex>
     </>
   );
