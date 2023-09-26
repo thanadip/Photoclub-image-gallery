@@ -1,35 +1,42 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Box, Flex, Img, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Img, Stack, Text } from "@chakra-ui/react";
 
-function Navbar() {
+function UserNavbar() {
   return (
     <Box bg="#2582FE" py={6}>
-      <Flex px="10%" align="center" justify={"space-between"}>
+      <Flex px="5%" align="center" justify="space-between">
         <Link to="/index">
-          {/* <Img src='src\assets\logo.jpg' boxSize={'40px'} borderRadius={'full'}></Img> */}
-          <Text> LOGO</Text>
+          <Text>LOGO</Text>
         </Link>
-        <Flex>
-          <Link to={"/index"}>
-            <Text mx={2}>Home</Text>
-          </Link>
-          <Link to={"/about"}>
-            <Text mx={2}>About</Text>
-          </Link>
-          <Link to="/register">
-            <Text mx={2}>Register</Text>
-          </Link>
-          <Link to="/contact">
-            <Text mx={2}>Contact</Text>
-          </Link>
-          <Link to="/login">
-            <Text mx={2}>Log-in</Text>
-          </Link>
-        </Flex>
+        <Stack
+          spacing={"20"}
+          direction="row"
+          align="center"
+          flex={1}
+          justify="center"
+        >
+          <Button as={Link} to={"/index"} bgColor={"#2582FE"} size="md">
+            Home
+          </Button>
+          <Button as={Link} to={"/about"} bgColor={"#2582FE"} size="md">
+            About
+          </Button>
+          <Button as={Link} to={"/Contact"} bgColor={"#2582FE"} size="md">
+            Contact
+          </Button>
+          <Button as={Link} to={"/Register"} bgColor={"#2582FE"} size="md">
+            Register
+          </Button>
+        </Stack>
+        <Link to="/login">
+          <Button bgColor={"yellow.400"} size="md">
+            Log-in
+          </Button>
+        </Link>
       </Flex>
     </Box>
   );
 }
 
-export default Navbar;
+export default UserNavbar;

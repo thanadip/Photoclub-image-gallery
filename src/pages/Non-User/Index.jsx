@@ -48,9 +48,9 @@ function UserHome() {
   return (
     <>
       <UniversalNav />
-      <Flex direction="column" align="center" mt="8dvh">
+      <Flex direction="column" align="center">
         <Center>
-          <Card w="100%">
+          <Card w="100%" mt={"8dvh"}>
             <CardHeader>
               <Heading size="md">เลือกปีการศึกษา:</Heading>
             </CardHeader>

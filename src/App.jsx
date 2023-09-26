@@ -27,7 +27,6 @@ import FolderYears from "./pages/Non-User/FolderYears";
 import ImageFolder from "./pages/Non-User/ImageFolder";
 import PageNotFound from "./pages/Non-User/PageNotFound";
 
-
 function App() {
   return (
     <BrowserRouter>
@@ -36,20 +35,20 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />}/>
-        <Route path="/index" element={<Index />}/>
-        <Route path="/user" element={<UserHome />}/>
-        <Route path="/admin" element={<AdminHome />}/>
-        <Route path="/blocked" element={<Blocked />}/>
-        <Route path="/adminContact" element={<AdminContact />}/>
-        <Route path="/userContact" element={<UserContact />}/>
-        <Route path="/user-display" element={<AdminUsers />}/>
-        <Route path="/image-display" element={<UserImage />}/>
-        <Route path="/admin-image" element={<AdminImages />}/>
-        <Route path="/admin-folder" element={<AdminFolders />}/>
-        <Route path="/images/:yearId" element={<FolderYears />}/>
-        <Route path="/images/:yearId/:folderId" element={<ImageFolder />}/>
-        <Route path="/*" element={<PageNotFound />}/>
+        <Route path="/login" element={<Login />} />
+        <Route path="/index" element={<Index />} />
+        <Route path="/user" element={<UserHome />} />
+        <Route path="/admin" element={<AdminHome />} />
+        <Route path="/blocked" element={<Blocked />} />
+        <Route path="/adminContact" element={<AdminContact />} />
+        <Route path="/userContact" element={<UserContact />} />
+        <Route path="/user-display" element={<AdminUsers />} />
+        <Route path="/image-display" element={<UserImage />} />
+        <Route path="/admin-image" element={<AdminImages />} />
+        <Route path="/admin-folder" element={<AdminFolders />} />
+        <Route path="/images/:yearId" element={<FolderYears />} />
+        <Route path="/images/:yearId/:folderId" element={<ImageFolder />} />
+        <Route path="/*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
   );
