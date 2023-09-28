@@ -4,7 +4,7 @@ import { Box, Button, Flex, Img, Stack, Text } from "@chakra-ui/react";
 
 function UserNavbar() {
   return (
-    <Box bg="#2582FE" py={6}>
+    <Box bg="#75bfec" py={6}>
       <Flex px="5%" align="center" justify="space-between">
         <Link to="/index">
           <Text>LOGO</Text>
@@ -16,16 +16,16 @@ function UserNavbar() {
           flex={1}
           justify="center"
         >
-          <Button as={Link} to={"/index"} bgColor={"#2582FE"} size="md">
+          <Button as={Link} to={"/index"} bgColor={"#75bfec"} size="md">
             Home
           </Button>
-          <Button as={Link} to={"/user-display"} bgColor={"#2582FE"} size="md">
+          <Button as={Link} to={"/user-display"} bgColor={"#75bfec"} size="md">
             Permission
           </Button>
-          <Button as={Link} to={"/admin-image"} bgColor={"#2582FE"} size="md">
+          <Button as={Link} to={"/admin-image"} bgColor={"#75bfec"} size="md">
             Upload Image
           </Button>
-          <Button as={Link} to={"/admin-folder"} bgColor={"#2582FE"} size="md">
+          <Button as={Link} to={"/admin-folder"} bgColor={"#75bfec"} size="md">
             Create Album
           </Button>
         </Stack>
