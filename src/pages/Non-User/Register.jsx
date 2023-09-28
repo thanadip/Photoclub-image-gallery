@@ -83,7 +83,7 @@ function Register() {
   };
 
   return (
-    <Flex h={"100dvh"} justify={"center"} backgroundColor={"#307EE8"}>
+    <Flex h={"100dvh"} justify={"center"} backgroundColor={"#75bfec"}>
       <Flex mr={"auto"}>
         <Stack my={"auto"} mx={"5vw"} pb={"10vw"}>
           <Text fontSize={"6xl"} textAlign={"left"}>
@@ -97,7 +97,7 @@ function Register() {
 
       <Flex minW={"60vw"} maxW={"60vw"} justifyContent={"center"}>
         <Stack w={"60%"}>
-          <Text fontSize={"6xl"} mb={"5vh"} mt={"5vh"}>
+          <Text fontSize={"6xl"} mb={"vh"} mt={"5vh"}>
             Register
           </Text>
 
