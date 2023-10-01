@@ -3,7 +3,6 @@ import {
   Flex,
   Input,
   Button,
-  Image,
   Menu,
   MenuButton,
   MenuList,
@@ -13,6 +12,7 @@ import {
   Spacer,
   VStack,
   Container,
+  Text,
 } from "@chakra-ui/react";
 import UniversalNav from "../../components/UniversalNav";
 import { ChevronDownIcon } from "@chakra-ui/icons";
@@ -106,7 +106,8 @@ function AdminImages() {
       <UniversalNav />
       <Container maxW="container.md" mt="4">
         <Heading mb="4">Create New Photo</Heading>
-        <VStack align="start" spacing="4">
+        <VStack align="start" spacing="7">
+          <Text>Select images to upload :</Text>
           <Input type="file" multiple onChange={handleImageSelection} />
           <Menu>
             <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
@@ -130,11 +131,10 @@ function AdminImages() {
         <Flex flexWrap="wrap" justifyContent="center" mt="4">
           {selectedImages.map((image, index) => (
             <Box key={index} maxW="200px" m="1rem">
-              <Image
+              <img
                 src={URL.createObjectURL(image)}
                 alt={`Selected ${index}`}
-                maxW="200px"
-                maxHeight="200px"
+                style={{ maxWidth: "200px", maxHeight: "200px" }}
               />
             </Box>
           ))}
