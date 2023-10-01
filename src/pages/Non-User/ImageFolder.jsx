@@ -33,7 +33,7 @@ function ImageFolder() {
         direction="column"
         align="center"
         p="4"
-        bg={"gray.100"}
+        bg={"white"}
         h={"100vh"}
       >
         <Text fontSize="xl" fontWeight="bold" mb="2">
