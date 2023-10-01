@@ -1,17 +1,8 @@
 import React, { useEffect, useState } from "react";
 import UniversalNav from "../../components/UniversalNav";
 import axios from "axios";
-import { useParams, Link } from "react-router-dom";
-import {
-  Box,
-  Card,
-  Flex,
-  Img,
-  List,
-  ListItem,
-  Text,
-  filter,
-} from "@chakra-ui/react";
+import { useParams } from "react-router-dom";
+import { Box, Flex, Img, Text } from "@chakra-ui/react";
 import "react-photo-view/dist/react-photo-view.css";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 
@@ -43,7 +34,7 @@ function ImageFolder() {
         align="center"
         p="4"
         bg={"gray.100"}
-        h={"100dvh"}
+        h={"100vh"}
       >
         <Text fontSize="xl" fontWeight="bold" mb="2">
           List of Images:
@@ -55,23 +46,29 @@ function ImageFolder() {
             onClick={handleImageClick}
             speed={() => 800}
           >
-            {images.map((image, index) => (
+            {images.map((image) => (
               <Box
-                key={index}
+                key={image.id}
                 padding="2px"
                 textAlign="center"
-                maxWidth="180px"
+                maxWidth="420px"
+                m="1rem" // Add some margin between images
+                borderRadius="4px" // Add border-radius for rounded corners
+                transition="0.3s" // Add a smooth transition effect
+                _hover={{ boxShadow: "0px 0px 5px 2px #ccc" }} // Add a hover effect
+                display="flex"
+                justifyContent="center" // Center horizontally
+                alignItems="center" // Center vertically
+                height="170px" // Set a fixed height for the container
               >
                 <PhotoView src={`data:image/png;base64,${image.pic_name}`}>
                   <Img
                     src={`data:image/png;base64,${image.pic_name}`}
-                    alt={`Image ${index}`}
-                    padding="5px"
-                    // borderRadius={"10px"}
+                    alt={`Image ${image.id}`}
                     maxW="100%"
-                    maxH={"200px"}
+                    maxH={"100%"}
                     cursor={"pointer"}
-                    _hover={{ filter: "brightness(80%)" }}
+                    loading="lazy"
                   />
                 </PhotoView>
               </Box>
