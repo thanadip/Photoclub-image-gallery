@@ -4,8 +4,8 @@ import { Box, Button, Flex, Img, Stack, Text } from "@chakra-ui/react";
 
 function UserNavbar() {
   return (
-    <Box bg="#75bfec" py={6}>
-      <Flex px="5%" align="center" justify="space-between">
+    <Box bg="#75bfec" py={3}>
+      <Flex px="7%" align="center" justify="space-between">
         <Link to="/index">
           <Text>LOGO</Text>
         </Link>
