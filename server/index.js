@@ -379,7 +379,7 @@ app.get("/get-folders/:yearId", async (req, res) => {
     const yearId = req.params.yearId;
 
     db.query(
-      "SELECT * FROM picture_folder WHERE year_id = ?",
+      "SELECT * FROM picture_folder WHERE year_id = ? AND folder_status = 1",
       [yearId],
       (err, results) => {
         if (err) {
@@ -444,6 +444,28 @@ app.get("/get-thumbnail/:folderId", async (req, res) => {
     );
   } catch (error) {
     console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+app.delete("/delete-folder/:folderId", async (req, res) => {
+  const folderID = req.params.folderId;
+  const sql = "DELETE picture_folder WHERE folder_id = ?";
+  try {
+    db.query(sql, [folderID], (err, result) => {
+      if (err) {
+        console.error("Error deleting folder:", err);
+        return res.status(500).json({ message: "Internal server error" });
+      }
+
+      if (result.affectedRows === 0) {
+        return res.status(400).json({ message: "Folder not found" });
+      }
+
+      return res.status(200).json({ message: "Folder delete successfully" });
+    });
+  } catch (error) {
+    console.error("Error deleting folder:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 });

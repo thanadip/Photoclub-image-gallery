@@ -26,6 +26,7 @@ import AdminFolders from "./pages/Admin/AdminFolders";
 import FolderYears from "./pages/Non-User/FolderYears";
 import ImageFolder from "./pages/Non-User/ImageFolder";
 import PageNotFound from "./pages/Non-User/PageNotFound";
+import AdminApprove from "./pages/Admin/AdminApprove";
 
 function App() {
   return (
@@ -48,7 +49,9 @@ function App() {
         <Route path="/admin-folder" element={<AdminFolders />} />
         <Route path="/images/:yearId" element={<FolderYears />} />
         <Route path="/images/:yearId/:folderId" element={<ImageFolder />} />
+        <Route path="/admin-approve" element={<AdminApprove />} />
         <Route path="/*" element={<PageNotFound />} />
+
       </Routes>
     </BrowserRouter>
   );

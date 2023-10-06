@@ -29,13 +29,7 @@ function ImageFolder() {
   return (
     <>
       <UniversalNav />
-      <Flex
-        direction="column"
-        align="center"
-        p="4"
-        bg={"white"}
-        h={"100vh"}
-      >
+      <Flex direction="column" align="center" p="4" bg={"white"} h={"100vh"}>
         <Text fontSize="xl" fontWeight="bold" mb="2">
           List of Images:
         </Text>

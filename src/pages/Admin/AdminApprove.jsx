@@ -2,9 +2,18 @@ import React, { useEffect, useState } from "react";
 import UniversalNav from "../../components/UniversalNav";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
-import { Flex, Text, Box, Wrap, WrapItem, Image } from "@chakra-ui/react";
+import {
+  Flex,
+  Text,
+  Box,
+  Wrap,
+  WrapItem,
+  Image,
+  Button,
+  Stack,
+} from "@chakra-ui/react";
 
-function FolderYears() {
+function AdminApprove() {
   const [folders, setFolders] = useState([]);
   const { yearId } = useParams();
 
@@ -12,7 +21,7 @@ function FolderYears() {
     const fetchData = async () => {
       try {
         const folderResponse = await axios.get(
-          `http://localhost:5001/get-folders/${yearId}`
+          `http://localhost:5001/get-folder`
         );
         const foldersData = folderResponse.data;
 
@@ -45,7 +54,7 @@ function FolderYears() {
     };
 
     fetchData();
-  }, [yearId]);
+  }, []);
 
   return (
     <>
@@ -82,6 +91,12 @@ function FolderYears() {
                   <Text fontSize="sm" color="gray.500">
                     Click to view images
                   </Text>
+                  <Stack direction={"row"} maxW={"180px"}>
+                    <Button fontSize={"sm"} bgColor={"red.500"} color={"white"}>
+                      Delete folder
+                    </Button>
+                    <Button fontSize={"sm"}>Hide folder</Button>
+                  </Stack>
                 </Box>
               </Link>
             </WrapItem>
@@ -91,5 +106,4 @@ function FolderYears() {
     </>
   );
 }
-
-export default FolderYears;
+export default AdminApprove;
