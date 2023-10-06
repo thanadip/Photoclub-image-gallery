@@ -448,9 +448,9 @@ app.get("/get-thumbnail/:folderId", async (req, res) => {
   }
 });
 
-app.delete("/delete-folder/:folderId", async (req, res) => {
+app.delete("/folder/:folderId", async (req, res) => {
   const folderID = req.params.folderId;
-  const sql = "DELETE picture_folder WHERE folder_id = ?";
+  const sql = "DELETE FROM picture_folder WHERE folder_id = ?";
   try {
     db.query(sql, [folderID], (err, result) => {
       if (err) {
@@ -466,6 +466,30 @@ app.delete("/delete-folder/:folderId", async (req, res) => {
     });
   } catch (error) {
     console.error("Error deleting folder:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+app.put("/folder/:folderId", async (req, res) => {
+  const folderID = req.params.folderId;
+  const folderStatus = req.body.folder_status;
+  const sql = "UPDATE picture_folder SET folder_status = ? WHERE folder_id = ?";
+
+  try {
+    db.query(sql, [folderStatus, folderID], (err, result) => {
+      if (err) {
+        console.error("Error updating user:", err);
+        return res.status(500, json({ message: "Internal server error" }));
+      }
+
+      if (result.affectedRows === 0) {
+        return res.status(400).json({ message: "Folder not found" });
+      }
+
+      return res.status(200).json({ message: "Status updated successfully" });
+    });
+  } catch (error) {
+    console.error("Error updating folder:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 });

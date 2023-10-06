@@ -29,7 +29,7 @@ function UserNavbar() {
             Create Album
           </Button>
           <Button as={Link} to={"/admin-approve"} bgColor={"#75bfec"} size="md">
-            Approve folder
+            Manage album
           </Button>
         </Stack>
         <Link to="/login">
