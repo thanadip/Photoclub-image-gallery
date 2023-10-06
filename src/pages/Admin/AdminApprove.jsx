@@ -130,23 +130,23 @@ function AdminApprove() {
         await Swal.fire({
           icon: "success",
           title: "Success!",
-          text: "Folder status updated successfully!",
+          text: "Album status updated successfully!",
           confirmButtonText: "OK",
         });
       } else {
         await Swal.fire({
           icon: "error",
           title: "Error!",
-          text: "Failed to update folder status!",
+          text: "Failed to update Album status!",
           confirmButtonText: "OK",
         });
       }
     } catch (error) {
-      console.error("Error updating folder status:", error);
+      console.error("Error updating Album status:", error);
       await Swal.fire({
         icon: "error",
         title: "Error!",
-        text: "Failed to update folder status!",
+        text: "Failed to update Album status!",
         confirmButtonText: "OK",
       });
     }
@@ -171,7 +171,7 @@ function AdminApprove() {
     const confirmShow = await Swal.fire({
       icon: "question",
       title: "Are you sure?",
-      text: "Do you want to show this folder?",
+      text: "Do you want to show this Album?",
       showCancelButton: true,
       confirmButtonText: "OK",
       cancelButtonText: "Cancel",
@@ -254,6 +254,17 @@ function AdminApprove() {
                       Hide folder
                     </Button>
                   </Stack>
+                  <Text fontSize="sm" mt="10px">
+                    Current Status:{" "}
+                    <Text
+                      display="inline-block"
+                      color={
+                        folder.folder_status === 0 ? "red.500" : "green.500"
+                      }
+                    >
+                      {folder.folder_status === 0 ? "Hidden" : "Showing"}
+                    </Text>
+                  </Text>
                 </Box>
               </Link>
             </WrapItem>
