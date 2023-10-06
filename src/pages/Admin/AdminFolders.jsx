@@ -18,6 +18,7 @@ import UniversalNav from "../../components/UniversalNav";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import axios from "axios";
 import Swal from "sweetalert2";
+import Cookies from "js-cookie";
 
 function AdminFolders() {
   const [yearName, setYearName] = useState("");
@@ -26,8 +27,19 @@ function AdminFolders() {
   const [selectedYearId, setSelectedYearId] = useState("");
   const [selectedYear, setSelectedYear] = useState([]);
 
+  const userRole = Cookies.get("userRole");
+
   const handleCreateYear = async () => {
     try {
+      if (userRole != 2) {
+        await Swal.fire({
+          icon: "error",
+          title: "Unauthorized",
+          text: "You don't have permission to create year!",
+        });
+        return;
+      }
+
       if (!yearName) {
         await Swal.fire({
           icon: "warning",

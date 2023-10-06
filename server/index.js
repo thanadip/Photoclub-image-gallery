@@ -493,3 +493,26 @@ app.put("/folder/:folderId", async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
+
+app.delete("/years/:yearId", async (req, res) => {
+  const sql = "DELETE FROM years WHERE year_id = ?";
+  const yearID = req.params.yearId;
+
+  try {
+    db.query(sql, [yearID], (err, result) => {
+      if (err) {
+        console.error("Error deleting year:", err);
+        return res.status(500).json({ message: "Internal server error" });
+      }
+
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ message: "Year not found" });
+      }
+
+      return res.status(200).json({ message: "Year deleted successfully" });
+    });
+  } catch (error) {
+    console.error("Error deleting year:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});

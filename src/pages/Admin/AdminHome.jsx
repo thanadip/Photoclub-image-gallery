@@ -1,13 +1,13 @@
-import React from 'react'
-import UniversalNav from '../../components/UniversalNav'
+import React from "react";
+import UniversalNav from "../../components/UniversalNav";
 
 function AdminHome() {
   return (
     <>
-    <UniversalNav/>
-    <div>UserHome</div>
+      <UniversalNav />
+      <div>UserHome</div>
     </>
-  )
+  );
 }
 
-export default AdminHome
+export default AdminHome;
