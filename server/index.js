@@ -516,3 +516,26 @@ app.delete("/years/:yearId", async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
+
+app.delete("/image/:imageId", async (req, res) => {
+  const sql = "DELETE FROM pictures WHERE pic_id = ?";
+  const imageID = req.params.imageId;
+
+  try {
+    db.query(sql, [imageID], (err, result) => {
+      if (err) {
+        console.error("Error deleting image:", err);
+        return res.status(500).json({ message: "Internal server error" });
+      }
+
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ message: "Image not found" });
+      }
+
+      return res.status(200).json({ message: "Image deleted successfully" });
+    });
+  } catch (error) {
+    console.error("Error deleting image:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});

@@ -16,7 +16,7 @@ function UserNavbar() {
           flex={1}
           justify="center"
         >
-          <Button as={Link} to={"/index"} bgColor={"#75bfec"} size="md">
+          <Button as={Link} to={"/admin"} bgColor={"#75bfec"} size="md">
             Home
           </Button>
           <Button as={Link} to={"/user-display"} bgColor={"#75bfec"} size="md">
