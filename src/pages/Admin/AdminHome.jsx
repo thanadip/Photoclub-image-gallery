@@ -19,7 +19,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import Swal from "sweetalert2";
-import { FaTrash } from "react-icons/fa";
+import { FaTrash, FaPencilAlt } from "react-icons/fa";
 
 function AdminHome() {
   const [years, setYears] = useState([]);
@@ -83,6 +83,61 @@ function AdminHome() {
     }
   };
 
+  const handleEditYear = async (year_id) => {
+    console.log(year_id);
+    const { value: newYearName, isConfirmed } = await Swal.fire({
+      title: "Input year",
+      input: "text",
+      inputAttributes: {
+        autocapitalize: "off",
+      },
+      showCancelButton: true,
+      preConfirm: (value) => {
+        if (!value) {
+          Swal.showValidationMessage("Blanked input year!");
+        }
+
+        return value;
+      },
+    });
+
+    if (isConfirmed && newYearName) {
+      try {
+        const response = await axios.put(
+          `http://localhost:5001/years/${year_id}`,
+          {
+            yearName: newYearName,
+          }
+        );
+
+        if (response.status === 200) {
+          await Swal.fire({
+            icon: "success",
+            title: "Success",
+            text: "Year name updated successfully!",
+          });
+
+          setYears((prevYears) =>
+            prevYears.map((year) =>
+              year.year_id === year_id
+                ? { ...year, year_name: newYearName }
+                : year
+            )
+          );
+        } else {
+          throw new Error("Failed to update year name");
+        }
+      } catch (error) {
+        console.log(error);
+        await Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Failed to update year name",
+        });
+      }
+    }
+  };
+
   useEffect(() => {
     axios
       .get("http://localhost:5001/get-year")
@@ -120,6 +175,19 @@ function AdminHome() {
                     mb="4"
                     position="relative"
                   >
+                    <IconButton
+                      icon={<FaPencilAlt />}
+                      aria-label="Update year"
+                      colorScheme="green"
+                      size="xs"
+                      position="absolute"
+                      top="0"
+                      right="7"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleEditYear(year.year_id);
+                      }}
+                    />
                     <IconButton
                       icon={<FaTrash />}
                       aria-label="Delete year"

@@ -564,3 +564,27 @@ app.put("/folder/:folderId", async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
+
+app.put("/years/:yearId", async (req, res) => {
+  const yearID = req.params.yearId;
+  const yearName = req.body.yearName;
+  const sql = "UPDATE years SET year_name = ? WHERE year_id = ?";
+
+  try {
+    db.query(sql, [yearName, yearID], (err, result) => {
+      if (err) {
+        console.error("Error updating year name:", err);
+        return res.status(500).json({ message: "Internal server error " });
+      }
+
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ message: "Year not found " });
+      }
+
+      return res.status(200).json({ message: "Year updating successfully" });
+    });
+  } catch (error) {
+    console.error("Error updating year name:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
