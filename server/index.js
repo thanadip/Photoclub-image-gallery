@@ -539,3 +539,28 @@ app.delete("/image/:imageId", async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
+
+app.put("/folder/:folderId", async (req, res) => {
+  const folderID = req.params.folderId;
+  const newFolderName = req.body.newFolderName;
+
+  const sql = "UPDATE picture_folder SET folder_name = ? WHERE folder_id = ?";
+
+  try {
+    db.query(sql, [newFolderName, folderID], (err, result) => {
+      if (err) {
+        console.error("Error updating folder name:", err);
+        return res.status(500).json({ message: "Internal server error " });
+      }
+
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ message: "Folder not found " });
+      }
+
+      return res.status(200).json({ message: "Folder updating successfully" });
+    });
+  } catch (error) {
+    console.error("Error updating folder name:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});

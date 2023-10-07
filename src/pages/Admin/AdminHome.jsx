@@ -124,7 +124,7 @@ function AdminHome() {
                       icon={<FaTrash />}
                       aria-label="Delete year"
                       colorScheme="red"
-                      size="sm"
+                      size="xs"
                       position="absolute"
                       top="0"
                       right="0"
