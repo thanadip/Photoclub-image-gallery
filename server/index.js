@@ -4,7 +4,7 @@ const cors = require("cors");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const multer = require("multer");
-// const Cookies = require('js-cookie');
+const sharp = require("sharp");
 
 const port = 5001;
 
@@ -420,6 +420,31 @@ app.get("/get-images/:folderId", async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
+
+// app.get("/get-images/:folderId", async (req, res) => {
+//   try {
+//     const folderId = req.params.folderId;
+//     const imagesData = await fetchImagesFromDatabase(folderId);
+
+//     const resizedImages = await Promise.all(
+//       imagesData.map(async (image) => {
+//         const resizedImageBuffer = await sharp(image.pic_name)
+//           .resize({ width: 800, height: 600 }) // Adjust dimensions as needed
+//           .toBuffer();
+
+//         return {
+//           id: image.id,
+//           pic_name: resizedImageBuffer.toString("base64"),
+//         };
+//       })
+//     );
+
+//     res.status(200).json(resizedImages);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ message: "Internal server error" });
+//   }
+// });
 
 app.get("/get-thumbnail/:folderId", async (req, res) => {
   try {

@@ -51,7 +51,6 @@ function App() {
         <Route path="/images/:yearId/:folderId" element={<ImageFolder />} />
         <Route path="/admin-approve" element={<AdminApprove />} />
         <Route path="/*" element={<PageNotFound />} />
-
       </Routes>
     </BrowserRouter>
   );

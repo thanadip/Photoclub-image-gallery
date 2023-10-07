@@ -18,7 +18,6 @@ import Swal from "sweetalert2";
 
 function AdminApprove() {
   const [folders, setFolders] = useState([]);
-  const { yearId } = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -153,6 +152,7 @@ function AdminApprove() {
   };
 
   const handleHideFolder = async (folderId) => {
+    console.log(yearId);
     const confirmHide = await Swal.fire({
       icon: "question",
       title: "Are you sure?",
@@ -192,7 +192,7 @@ function AdminApprove() {
         <Wrap spacing="2">
           {folders.map((folder) => (
             <WrapItem key={folder.folder_id}>
-              <Link to={`/images/${yearId}/${folder.folder_id}`}>
+              <Link to={`/images/${folder.year_id}/${folder.folder_id}`}>
                 <Box
                   display="flex"
                   flexDirection="column"
