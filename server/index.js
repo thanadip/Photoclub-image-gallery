@@ -627,13 +627,12 @@ app.get("/gen-thumbnail/:folderId", async (req, res) => {
           return res.status(500).json({ message: "Internal server error" });
         }
 
-        // Resize and compress images using Sharp
         const images = await Promise.all(
           results.map(async (row) => {
             try {
               const resizedBuffer = await sharp(row.pic_name)
-                .resize({ width: 200 }) // Adjust the width as needed
-                .png({ quality: 60 }) // Adjust the quality as needed
+                .resize({ width: 200 })
+                .png({ quality: 60 })
                 .toBuffer();
 
               return {
@@ -653,6 +652,28 @@ app.get("/gen-thumbnail/:folderId", async (req, res) => {
     );
   } catch (error) {
     console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+app.delete("/images/:imageId", async (req, res) => {
+  const imageID = req.params.imageId;
+  const sql = "DELETE pictures WHERE pic_id = ?";
+
+  try {
+    db.query(sql, [imageID], (err, result) => {
+      if (err) {
+        return res.status(500).json({ message: "internal server error" });
+      }
+
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ message: "Image not found" });
+      }
+
+      return res.status(200).json({ message: "Delete image successfully" });
+    });
+  } catch (error) {
+    console.error("Error deleting image:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 });
