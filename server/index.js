@@ -613,3 +613,46 @@ app.put("/years/:yearId", async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
+
+app.get("/gen-thumbnail/:folderId", async (req, res) => {
+  try {
+    const folderId = req.params.folderId;
+
+    db.query(
+      "SELECT pic_name FROM pictures WHERE folder_id = ?",
+      [folderId],
+      async (err, results) => {
+        if (err) {
+          console.error(err);
+          return res.status(500).json({ message: "Internal server error" });
+        }
+
+        // Resize and compress images using Sharp
+        const images = await Promise.all(
+          results.map(async (row) => {
+            try {
+              const resizedBuffer = await sharp(row.pic_name)
+                .resize({ width: 200 }) // Adjust the width as needed
+                .png({ quality: 60 }) // Adjust the quality as needed
+                .toBuffer();
+
+              return {
+                pic_name: resizedBuffer.toString("base64"),
+              };
+            } catch (error) {
+              console.error(error);
+              return {
+                pic_name: null,
+              };
+            }
+          })
+        );
+
+        res.status(200).json(images);
+      }
+    );
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});

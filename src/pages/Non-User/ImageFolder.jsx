@@ -8,6 +8,7 @@ import { PhotoProvider, PhotoView } from "react-photo-view";
 
 function ImageFolder() {
   const [images, setImages] = useState([]);
+  const [thumbnails, setThumbnails] = useState([]);
   const { folderId } = useParams();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -16,6 +17,15 @@ function ImageFolder() {
       .get(`http://localhost:5001/get-images/${folderId}`)
       .then((response) => {
         setImages(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    axios
+      .get(`http://localhost:5001/gen-thumbnail/${folderId}`)
+      .then((response) => {
+        setThumbnails(response.data);
       })
       .catch((error) => {
         console.error(error);
@@ -40,9 +50,9 @@ function ImageFolder() {
             onClick={handleImageClick}
             speed={() => 800}
           >
-            {images.map((image) => (
+            {thumbnails.map((thumbnail, index) => (
               <Box
-                key={image.id}
+                key={index}
                 padding="2px"
                 textAlign="center"
                 maxWidth="420px"
@@ -55,10 +65,12 @@ function ImageFolder() {
                 alignItems="center" // Center vertically
                 height="170px" // Set a fixed height for the container
               >
-                <PhotoView src={`data:image/png;base64,${image.pic_name}`}>
+                <PhotoView
+                  src={`data:image/png;base64,${images[index].pic_name}`}
+                >
                   <Img
-                    src={`data:image/png;base64,${image.pic_name}`}
-                    alt={`Image ${image.id}`}
+                    src={`data:image/png;base64,${thumbnail.pic_name}`}
+                    alt={`Image ${index}`}
                     maxW="100%"
                     maxH={"100%"}
                     cursor={"pointer"}
