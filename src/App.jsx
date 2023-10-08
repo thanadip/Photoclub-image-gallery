@@ -27,6 +27,7 @@ import FolderYears from "./pages/Non-User/FolderYears";
 import ImageFolder from "./pages/Non-User/ImageFolder";
 import PageNotFound from "./pages/Non-User/PageNotFound";
 import AdminApprove from "./pages/Admin/AdminApprove";
+import AdminManageImage from "./pages/Admin/AdminManageImage";
 
 function App() {
   return (
@@ -50,6 +51,10 @@ function App() {
         <Route path="/images/:yearId" element={<FolderYears />} />
         <Route path="/images/:yearId/:folderId" element={<ImageFolder />} />
         <Route path="/admin-approve" element={<AdminApprove />} />
+        <Route
+          path="/manage-images/:yearId/:folderId"
+          element={<AdminManageImage />}
+        />
         <Route path="/*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>

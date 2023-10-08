@@ -152,7 +152,7 @@ function AdminApprove() {
   };
 
   const handleHideFolder = async (folderId) => {
-    console.log(yearId);
+    console.log(folderId);
     const confirmHide = await Swal.fire({
       icon: "question",
       title: "Are you sure?",
@@ -192,7 +192,7 @@ function AdminApprove() {
         <Wrap spacing="2">
           {folders.map((folder) => (
             <WrapItem key={folder.folder_id}>
-              <Link to={`/images/${folder.year_id}/${folder.folder_id}`}>
+              <Link to={`/manage-images/${folder.year_id}/${folder.folder_id}`}>
                 <Box
                   display="flex"
                   flexDirection="column"
