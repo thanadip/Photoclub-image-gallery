@@ -79,7 +79,7 @@ app.post("/login", async (req, res) => {
       }
 
       const user = {
-        id: existingUser[0].id,
+        id: existingUser[0].user_id,
         username: existingUser[0].username,
         user_email: existingUser[0].user_email,
         password: existingUser[0].password,
@@ -92,6 +92,7 @@ app.post("/login", async (req, res) => {
         token: token,
         user_type_id: user.user_type_id,
         username: user.username,
+        id: user.id,
       });
     });
   } catch (error) {

@@ -20,6 +20,8 @@ function Login() {
 
   useEffect(() => {
     Cookies.remove("userRole");
+    Cookies.remove("userId");
+    Cookies.remove("username");
   }, []);
 
   const handleFormSubmit = async (e) => {
@@ -31,9 +33,9 @@ function Login() {
       });
 
       const userType = response.data.user_type_id;
+      const userId = response.data.id;
 
       if (response.status === 200) {
-        console.log("User Type:", userType);
         if (userType === 1) {
           navigate("/Index");
         } else if (userType === 2 || userType === 3) {
@@ -45,6 +47,8 @@ function Login() {
         }
 
         Cookies.set("userRole", userType);
+        Cookies.set("userId", userId);
+        Cookies.set("username", username);
 
         await Swal.fire({
           position: "center",
