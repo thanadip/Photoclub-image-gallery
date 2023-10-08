@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import UniversalNav from "../../components/UniversalNav";
 import axios from "axios";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   Flex,
   Text,
@@ -13,7 +13,7 @@ import {
   Stack,
   IconButton,
 } from "@chakra-ui/react";
-import { FaTrash } from "react-icons/fa";
+import { FaTrash, FaPencilAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 import Cookies from "js-cookie";
 
@@ -72,7 +72,7 @@ function AdminApprove() {
 
     if (confirmDelete.isConfirmed) {
       try {
-        if (userRole != 2) {
+        if (userRole !== "2") {
           await Swal.fire({
             icon: "error",
             title: "Unauthorized",
@@ -173,7 +173,7 @@ function AdminApprove() {
     });
 
     if (confirmHide.isConfirmed) {
-      if (userRole != 2) {
+      if (userRole !== "2") {
         await Swal.fire({
           icon: "error",
           title: "Unauthorized",
@@ -196,7 +196,7 @@ function AdminApprove() {
     });
 
     if (confirmShow.isConfirmed) {
-      if (userRole != 2) {
+      if (userRole !== "2") {
         await Swal.fire({
           icon: "error",
           title: "Unauthorized",
@@ -205,6 +205,74 @@ function AdminApprove() {
         return;
       }
       updateFolderStatus(folderId, 1);
+    }
+  };
+
+  const handleEditFolder = async (folderId) => {
+    const folder = folders.find((folder) => folder.folder_id === folderId);
+
+    if (!folder) {
+      Swal.fire({
+        icon: "error",
+        title: "Folder not found",
+        text: "The selected folder was not found.",
+      });
+      return;
+    }
+
+    const { value: newFolderName, isConfirmed } = await Swal.fire({
+      title: "Edit Folder Name",
+      input: "text",
+      inputValue: folder.folder_name,
+      showCancelButton: true,
+      confirmButtonText: "Save",
+      cancelButtonText: "Cancel",
+      inputValidator: (value) => {
+        if (!value) {
+          return "Folder name cannot be empty";
+        }
+      },
+    });
+
+    if (isConfirmed) {
+      try {
+        const response = await axios.put(
+          `http://localhost:5001/folder-edit/${folderId}`,
+          {
+            newFolderName: newFolderName,
+          }
+        );
+
+        if (response.status === 200) {
+          setFolders((prevFolders) =>
+            prevFolders.map((prevFolder) =>
+              prevFolder.folder_id === folderId
+                ? { ...prevFolder, folder_name: newFolderName }
+                : prevFolder
+            )
+          );
+
+          Swal.fire({
+            icon: "success",
+            title: "Folder Name Updated",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Something went wrong!",
+            text: "Failed to update the folder name",
+          });
+        }
+      } catch (error) {
+        console.error(error);
+        Swal.fire({
+          icon: "error",
+          title: "Something went wrong!",
+          text: "Something went wrong while updating the folder name",
+        });
+      }
     }
   };
 
@@ -231,10 +299,23 @@ function AdminApprove() {
                   _hover={{ transform: "scale(1.05)" }}
                 >
                   <IconButton
+                    icon={<FaPencilAlt />}
+                    aria-label="Edit album"
+                    colorScheme="green"
+                    size="xs"
+                    position="absolute"
+                    top="0"
+                    right="7"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleEditFolder(folder.folder_id);
+                    }}
+                  />
+                  <IconButton
                     icon={<FaTrash />}
                     aria-label="Delete folder"
                     colorScheme="red"
-                    size="sm"
+                    size="xs"
                     position="absolute"
                     top="0"
                     right="0"
@@ -300,4 +381,5 @@ function AdminApprove() {
     </>
   );
 }
+
 export default AdminApprove;
