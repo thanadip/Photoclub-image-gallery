@@ -5,10 +5,18 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const multer = require("multer");
 const sharp = require("sharp");
+const cookieParser = require("cookie-parser");
 
 const port = 5001;
 
 const app = express();
+
+app.use(cors());
+app.use(cookieParser());
+app.use(express.json());
+
+const storage = multer.memoryStorage();
+const upload = multer({ storage, limits: { fileSize: 30 * 1024 * 1024 } });
 
 const db = mysql.createConnection({
   host: "localhost",
@@ -36,9 +44,6 @@ db.connect((err) => {
 app.listen(port, () => {
   console.log("Backend connected");
 });
-
-app.use(express.json());
-app.use(cors());
 
 app.get("/", (req, res) => {
   res.json("hello this is the backend ");
@@ -218,9 +223,6 @@ app.put("/users/:userId", async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
-
-const storage = multer.memoryStorage();
-const upload = multer({ storage, limits: { fileSize: 30 * 1024 * 1024 } });
 
 app.post("/upload-images", upload.array("images"), async (req, res) => {
   try {
@@ -423,31 +425,6 @@ app.get("/get-images/:folderId", async (req, res) => {
   }
 });
 
-// app.get("/get-images/:folderId", async (req, res) => {
-//   try {
-//     const folderId = req.params.folderId;
-//     const imagesData = await fetchImagesFromDatabase(folderId);
-
-//     const resizedImages = await Promise.all(
-//       imagesData.map(async (image) => {
-//         const resizedImageBuffer = await sharp(image.pic_name)
-//           .resize({ width: 800, height: 600 }) // Adjust dimensions as needed
-//           .toBuffer();
-
-//         return {
-//           id: image.id,
-//           pic_name: resizedImageBuffer.toString("base64"),
-//         };
-//       })
-//     );
-
-//     res.status(200).json(resizedImages);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ message: "Internal server error" });
-//   }
-// });
-
 app.get("/get-thumbnail/:folderId", async (req, res) => {
   try {
     const folderId = req.params.folderId;
@@ -479,7 +456,7 @@ app.delete("/folder/:folderId", async (req, res) => {
   const folderID = req.params.folderId;
   const sql = "DELETE FROM picture_folder WHERE folder_id = ?";
   try {
-    db.query(sql, [folderID], (err, result) => {
+    db.query(sql, [folderID], async (err, result) => {
       if (err) {
         console.error("Error deleting folder:", err);
         return res.status(500).json({ message: "Internal server error" });

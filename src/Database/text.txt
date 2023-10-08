@@ -1,0 +1,9 @@
+CREATE TABLE log_history (
+  log_id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT,
+  action ENUM('query', 'update', 'delete'),
+  timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  query_details TEXT,
+  update_details TEXT,
+  delete_details TEXT
+);
