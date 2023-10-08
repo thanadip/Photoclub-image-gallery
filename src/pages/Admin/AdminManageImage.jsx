@@ -7,12 +7,15 @@ import "react-photo-view/dist/react-photo-view.css";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import { FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
+import Cookies from "js-cookie";
 
 function AdminManageImage() {
   const [images, setImages] = useState([]);
   const [thumbnails, setThumbnails] = useState([]);
   const { folderId } = useParams();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const userRole = Cookies.get("userRole");
 
   useEffect(() => {
     axios
@@ -45,6 +48,15 @@ function AdminManageImage() {
 
     if (result.isConfirmed) {
       try {
+        if (userRole != 2) {
+          await Swal.fire({
+            icon: "error",
+            title: "Unauthorized",
+            text: "You don't have permission to Delete Image!",
+          });
+          return;
+        }
+
         const response = await axios.delete(
           `http://localhost:5001/images/${imageId}`
         );

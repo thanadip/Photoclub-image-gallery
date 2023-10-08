@@ -31,6 +31,9 @@ function UserNavbar() {
           <Button as={Link} to={"/admin-folder"} bgColor={"#75bfec"} size="md">
             Create Album
           </Button>
+          <Button as={Link} to={"/admin-approve"} bgColor={"#75bfec"} size="md">
+            Manage album
+          </Button>
         </Stack>
         <Link to="/login">
           <Button bgColor={"yellow.400"} size="md">

@@ -15,9 +15,11 @@ import {
 } from "@chakra-ui/react";
 import { FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
+import Cookies from "js-cookie";
 
 function AdminApprove() {
   const [folders, setFolders] = useState([]);
+  const userRole = Cookies.get("userRole");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -70,6 +72,14 @@ function AdminApprove() {
 
     if (confirmDelete.isConfirmed) {
       try {
+        if (userRole != 2) {
+          await Swal.fire({
+            icon: "error",
+            title: "Unauthorized",
+            text: "You don't have permission to Delete Image!",
+          });
+          return;
+        }
         console.log(folderId);
         const response = await fetch(
           `http://localhost:5001/folder/${folderId}`,
@@ -156,13 +166,21 @@ function AdminApprove() {
     const confirmHide = await Swal.fire({
       icon: "question",
       title: "Are you sure?",
-      text: "Do you want to hide this folder?",
+      text: "Do you want to hide this album?",
       showCancelButton: true,
       confirmButtonText: "OK",
       cancelButtonText: "Cancel",
     });
 
     if (confirmHide.isConfirmed) {
+      if (userRole != 2) {
+        await Swal.fire({
+          icon: "error",
+          title: "Unauthorized",
+          text: "You don't have permission to hide the album!",
+        });
+        return;
+      }
       updateFolderStatus(folderId, 0);
     }
   };
@@ -178,6 +196,14 @@ function AdminApprove() {
     });
 
     if (confirmShow.isConfirmed) {
+      if (userRole != 2) {
+        await Swal.fire({
+          icon: "error",
+          title: "Unauthorized",
+          text: "You don't have permission to Show the album!",
+        });
+        return;
+      }
       updateFolderStatus(folderId, 1);
     }
   };

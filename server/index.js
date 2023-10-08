@@ -566,7 +566,7 @@ app.delete("/image/:imageId", async (req, res) => {
   }
 });
 
-app.put("/folder/:folderId", async (req, res) => {
+app.put("/folder-edit/:folderId", async (req, res) => {
   const folderID = req.params.folderId;
   const newFolderName = req.body.newFolderName;
 
