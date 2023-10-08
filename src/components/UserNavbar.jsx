@@ -19,12 +19,6 @@ function UserNavbar() {
           <Button as={Link} to={"/index"} bgColor={"#75bfec"} size="md">
             Home
           </Button>
-          <Button as={Link} to={"/about"} bgColor={"#75bfec"} size="md">
-            About
-          </Button>
-          <Button as={Link} to={"/Contact"} bgColor={"#75bfec"} size="md">
-            Contact
-          </Button>
           <Button as={Link} to={"/admin-image"} bgColor={"#75bfec"} size="md">
             Upload Image
           </Button>

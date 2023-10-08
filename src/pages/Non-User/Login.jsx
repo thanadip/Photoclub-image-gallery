@@ -37,7 +37,7 @@ function Login() {
         if (userType === 1) {
           navigate("/Index");
         } else if (userType === 2 || userType === 3) {
-          navigate("/Index");
+          navigate("/admin");
         } else if (userType === 0) {
           navigate("/blocked");
         } else {
