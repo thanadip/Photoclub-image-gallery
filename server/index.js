@@ -401,7 +401,7 @@ app.get("/get-images/:folderId", async (req, res) => {
     const folderId = req.params.folderId;
 
     db.query(
-      "SELECT pic_name FROM pictures WHERE folder_id = ?",
+      "SELECT pic_id , pic_name FROM pictures WHERE folder_id = ?",
       [folderId],
       (err, results) => {
         if (err) {
@@ -410,6 +410,7 @@ app.get("/get-images/:folderId", async (req, res) => {
         }
 
         const images = results.map((row) => ({
+          pic_id: row.pic_id,
           pic_name: row.pic_name.toString("base64"),
         }));
         res.status(200).json(images);
@@ -658,11 +659,12 @@ app.get("/gen-thumbnail/:folderId", async (req, res) => {
 
 app.delete("/images/:imageId", async (req, res) => {
   const imageID = req.params.imageId;
-  const sql = "DELETE pictures WHERE pic_id = ?";
+  const sql = "DELETE FROM pictures WHERE pic_id = ?";
 
   try {
     db.query(sql, [imageID], (err, result) => {
       if (err) {
+        console.log("Error deleting image:", err);
         return res.status(500).json({ message: "internal server error" });
       }
 

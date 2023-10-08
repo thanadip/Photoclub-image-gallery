@@ -34,7 +34,7 @@ function AdminManageImage() {
       });
   }, [folderId]);
 
-  const handleDeleteImage = async (imageId) => {
+  const handleDeleteImage = async (imageId, index) => {
     const result = await Swal.fire({
       title: "Are you sure?",
       text: "Do you want to delete this image?",
@@ -50,7 +50,10 @@ function AdminManageImage() {
         );
         if (response.status === 200) {
           setImages((prevImages) =>
-            prevImages.filter((image) => image.id !== imageId)
+            prevImages.filter((image) => image.pic_id !== imageId)
+          );
+          setThumbnails((prevThumbnails) =>
+            prevThumbnails.filter((_, i) => i !== index)
           );
           await Swal.fire({
             icon: "success",
@@ -108,8 +111,9 @@ function AdminManageImage() {
                 transition="0.3s"
                 _hover={{ boxShadow: "0px 0px 5px 2px #ccc" }}
                 display="flex"
-                justifyContent="center"
+                flexDirection="column"
                 alignItems="center"
+                position="relative"
                 height="170px"
               >
                 <PhotoView
@@ -120,8 +124,8 @@ function AdminManageImage() {
                     alt={`Image ${index}`}
                     maxW="100%"
                     maxH="100%"
-                    my={"auto"}
-                    cursor={"pointer"}
+                    my="auto"
+                    cursor="pointer"
                     loading="lazy"
                   />
                 </PhotoView>
@@ -135,7 +139,7 @@ function AdminManageImage() {
                   right="0"
                   onClick={(e) => {
                     e.preventDefault();
-                    handleDeleteImage(images[index].id);
+                    handleDeleteImage(images[index].pic_id, index);
                   }}
                 />
               </Box>
