@@ -1,3 +1,8 @@
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import Cookies from "js-cookie";
+import Swal from "sweetalert2";
 import {
   Button,
   Card,
@@ -7,11 +12,6 @@ import {
   Input,
   Text,
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import Cookies from "js-cookie";
-import Swal from "sweetalert2";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -76,13 +76,12 @@ function Login() {
   };
 
   return (
-    <Flex h={"100dvh"} justifyContent={"center"} bg={"black"}>
+    <Flex h={"100vh"} justifyContent={"center"} bg={"black"}>
       <Card my={"auto"} justify={"center"} padding={"2.5vw"}>
         <Flex flexDirection={"column"}>
           <Text textAlign={"center"} fontSize={"2xl"}>
             Login
           </Text>
-
           <form onSubmit={handleFormSubmit}>
             <FormControl padding={"1vw"} isRequired>
               <FormLabel padding={"0.5vh"}>Username</FormLabel>
@@ -104,7 +103,7 @@ function Login() {
 
               <Flex justifyContent={"center"} mt={"4"} flexDirection={"column"}>
                 <Button colorScheme="teal" size="md" type="submit">
-                  login
+                  Login
                 </Button>
 
                 <Text fontSize={"1xl"} textAlign={"center"} mt={2}>
@@ -115,10 +114,18 @@ function Login() {
                     as={Link}
                     to="/register"
                   >
-                    {" "}
-                    Register now{" "}
+                    Register now
                   </Text>
                 </Text>
+                <Text
+                    color={"gray.500"}
+                    textDecoration={"underline"}
+                    textAlign={"center"} 
+                    as={Link}
+                    to="/index"
+                  >
+                    Back to Home
+                  </Text>
               </Flex>
             </FormControl>
           </form>
