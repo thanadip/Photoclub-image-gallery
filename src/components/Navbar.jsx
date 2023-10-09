@@ -1,13 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Box, Button, Flex, Img, Stack, Text } from "@chakra-ui/react";
+import logo from "../assets/2.png";
 
 function UserNavbar() {
   return (
     <Box bg="#75bfec" py={3}>
       <Flex px="7%" align="center" justify="space-between">
         <Link to="/index">
-          <Text>LOGO</Text>
+          <Img src={logo} maxW={"100px"} maxH={"50px"}></Img>
         </Link>
         <Stack
           spacing={"20"}
