@@ -35,6 +35,12 @@ function Login() {
       const userType = response.data.user_type_id;
       const userId = response.data.id;
 
+      if (userType === 1 || userType === 2 || userType === 3) {
+        Cookies.set("userRole", userType);
+        Cookies.set("userId", userId);
+        Cookies.set("username", username);
+      }
+
       if (response.status === 200) {
         if (userType === 1) {
           navigate("/Index");
@@ -45,10 +51,6 @@ function Login() {
         } else {
           navigate("/*");
         }
-
-        Cookies.set("userRole", userType);
-        Cookies.set("userId", userId);
-        Cookies.set("username", username);
 
         await Swal.fire({
           position: "center",
@@ -118,14 +120,14 @@ function Login() {
                   </Text>
                 </Text>
                 <Text
-                    color={"gray.500"}
-                    textDecoration={"underline"}
-                    textAlign={"center"} 
-                    as={Link}
-                    to="/index"
-                  >
-                    Back to Home
-                  </Text>
+                  color={"gray.500"}
+                  textDecoration={"underline"}
+                  textAlign={"center"}
+                  as={Link}
+                  to="/index"
+                >
+                  Back to Home
+                </Text>
               </Flex>
             </FormControl>
           </form>
