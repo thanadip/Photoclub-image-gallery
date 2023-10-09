@@ -63,7 +63,7 @@ function ImageFolder() {
                 display="flex"
                 justifyContent="center" // Center horizontally
                 alignItems="center" // Center vertically
-                height="170px" // Set a fixed height for the container
+                height="140px" // Set a fixed height for the container
               >
                 <PhotoView
                   src={`data:image/png;base64,${images[index].pic_name}`}
