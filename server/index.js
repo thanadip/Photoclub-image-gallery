@@ -611,7 +611,7 @@ app.get("/gen-thumbnail/:folderId", async (req, res) => {
             try {
               const resizedBuffer = await sharp(row.pic_name)
                 .resize({ width: 200 })
-                .png({ quality: 60 })
+                .png({ quality: 30 })
                 .toBuffer();
 
               return {
