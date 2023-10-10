@@ -23,14 +23,14 @@ const db = mysql.createConnection({
   user: "root",
   password: "",
   database: "gallery",
-  connectTimeout: 20000,
+  connectTimeout: 90000,
   multipleStatements: true,
   charset: "utf8mb4",
   bigNumberStrings: true,
   dateStrings: true,
   supportBigNumbers: true,
   typeCast: true,
-  maxAllowedPacket: 100 * 1024 * 1024,
+  maxAllowedPacket: 500 * 1024 * 1024,
 });
 
 db.connect((err) => {
