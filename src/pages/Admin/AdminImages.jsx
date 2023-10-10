@@ -25,6 +25,16 @@ function AdminImages() {
   const [selectedFolderId, setSelectedFolderId] = useState(null);
 
   const handleImageUpload = async () => {
+    if (selectedImages.length > 100) {
+      await Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "You can upload a maximum of 100 images at once.",
+        confirmButtonText: "OK",
+      });
+      return;
+    }
+
     const formData = new FormData();
     selectedImages.forEach((image) => {
       formData.append("images", image);
