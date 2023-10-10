@@ -324,7 +324,7 @@ function AdminApprove() {
                       handleDeleteFolder(folder.folder_id);
                     }}
                   />
-                  {folder.firstImage && (
+                  {folder.firstImage ? (
                     <Image
                       src={`data:image/jpeg;base64,${folder.firstImage}`}
                       alt={folder.folder_name}
@@ -333,6 +333,17 @@ function AdminApprove() {
                       borderRadius="md"
                       mb="2"
                     />
+                  ) : (
+                    <Flex
+                      alignItems="center"
+                      justifyContent="center"
+                      h="200px"
+                      textAlign="center"
+                    >
+                      <Text fontSize="lg" color="gray.500" mt="4">
+                        No images in the album
+                      </Text>
+                    </Flex>
                   )}
                   <Text fontSize="lg">{folder.folder_name}</Text>
                   <Stack direction={"row"} maxW={"180px"}>

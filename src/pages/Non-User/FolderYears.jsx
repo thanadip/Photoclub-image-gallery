@@ -68,7 +68,7 @@ function FolderYears() {
                   transition="transform 0.2s"
                   _hover={{ transform: "scale(1.05)" }}
                 >
-                  {folder.firstImage && (
+                  {folder.firstImage ? (
                     <Image
                       src={`data:image/jpeg;base64,${folder.firstImage}`}
                       alt={folder.folder_name}
@@ -77,6 +77,17 @@ function FolderYears() {
                       borderRadius="md"
                       mb="2"
                     />
+                  ) : (
+                    <Flex
+                      alignItems="center"
+                      justifyContent="center"
+                      h="200px"
+                      textAlign="center"
+                    >
+                      <Text fontSize="lg" color="gray.500">
+                        No images in the album
+                      </Text>
+                    </Flex>
                   )}
                   <Text fontSize="lg">{folder.folder_name}</Text>
                   <Text fontSize="sm" color="gray.500">
