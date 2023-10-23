@@ -1,14 +1,20 @@
-# Comsci
-โปรเจคจบ comsci :)
+# โปรเจคจบ Comsci
 
-npm i
+**Tools**
+>ReactJS
+>NodeJS
+>ChakraUI
 
-npm run serve
+#Installation
 
-cd server
+`npm i`
 
-npm i
+`npm run serve`
 
-npm start
+`cd server`
+
+`npm i`
+
+`npm start`
 
 
