@@ -5,7 +5,7 @@
 >NodeJS
 >ChakraUI
 
-#Installation
+# Installation
 
 `npm i`
 
