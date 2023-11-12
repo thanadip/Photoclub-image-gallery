@@ -1,8 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import UniversalNav from "../../components/UniversalNav";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { Box, Flex, Img, Text, Spinner } from "@chakra-ui/react"; // Import Spinner from Chakra UI
+import {
+  Box,
+  Flex,
+  Img,
+  Text,
+  Spinner,
+} from "@chakra-ui/react";
 import "react-photo-view/dist/react-photo-view.css";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import Cookies from "js-cookie";
@@ -10,63 +16,108 @@ import Cookies from "js-cookie";
 function ImageFolder() {
   const [images, setImages] = useState([]);
   const [thumbnails, setThumbnails] = useState([]);
-  const [loading, setLoading] = useState(true); // State to manage loading status
-  const { folderId } = useParams();
+  const [loading, setLoading] = useState(true);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [page, setPage] = useState(1);
+  const imagesPerPage = 10; // Number of images to load at a time
+  const hasMoreImages = useRef(true);
+  const { folderId } = useParams();
 
   useEffect(() => {
-    // Check if images are cached in cookies
     const cachedImages = Cookies.get(`cachedImages_${folderId}`);
-    if (cachedImages) {
-      setImages(JSON.parse(cachedImages));
-      setLoading(false); // Set loading to false when images are loaded from cache
-      return;
-    }
+    const loadImagesForPage = async (pageToLoad) => {
+      try {
+        const response = await axios.get(
+          `http://localhost:5001/get-images/${folderId}?page=${pageToLoad}&perPage=${imagesPerPage}`
+        );
+        const newImages = response.data;
 
-    axios
-      .get(`http://localhost:5001/get-images/${folderId}`)
-      .then((response) => {
-        setImages(response.data);
-        setLoading(false); // Set loading to false when images are loaded
-        // Cache images in cookies
-        Cookies.set(`cachedImages_${folderId}`, JSON.stringify(response.data), {
-          expires: 1, // Cache for 1 day
-        });
-      })
-      .catch((error) => {
+        if (newImages.length < imagesPerPage) {
+          hasMoreImages.current = false;
+        }
+
+        setImages((prevImages) => [...prevImages, ...newImages]);
+        setLoading(false);
+
+        // Cache images in cookies (only if it's the first page)
+        if (pageToLoad === 1) {
+          Cookies.set(
+            `cachedImages_${folderId}`,
+            JSON.stringify(prevImages),
+            {
+              expires: 1,
+            }
+          );
+        }
+      } catch (error) {
         console.error(error);
-      });
+      }
+    };
 
-    axios
-      .get(`http://localhost:5001/gen-thumbnail/${folderId}`)
-      .then((response) => {
+    const loadThumbnails = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:5001/gen-thumbnail/${folderId}`
+        );
         setThumbnails(response.data);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error(error);
-      });
-  }, [folderId]);
+      }
+    };
+
+    const loadImagesAndThumbnails = async () => {
+      await Promise.all([loadImagesForPage(page), loadThumbnails()]);
+    };
+
+    // Load images and thumbnails for the initial page
+    loadImagesAndThumbnails();
+  }, [folderId, page]);
 
   const handleImageClick = (index) => {
     setCurrentImageIndex(index);
   };
 
+  const handleScroll = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop ===
+      document.documentElement.offsetHeight
+    ) {
+      if (hasMoreImages.current) {
+        setPage((prevPage) => prevPage + 1);
+      }
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <>
       <UniversalNav />
-      <Flex direction="column" align="center" p="4" bg={"white"} h={"100vh"}>
+      <Flex
+        direction="column"
+        align="center"
+        p="4"
+        bg={"white"}
+        h={"100vh"}
+      >
         <Text fontSize="xl" fontWeight="bold" mb="2">
           List of Images:
         </Text>
 
-        {loading ? ( // Show the spinner when loading is true
-        <Spinner
-  thickness='4px'
-  speed='0.65s'
-  emptyColor='gray.200'
-  color='blue.500'
-  size='xl'
-/>        ) : (
+        {loading ? (
+          <Spinner
+            thickness="4px"
+            speed="0.65s"
+            emptyColor="gray.200"
+            color="blue.500"
+            size="xl"
+          />
+        ) : (
           <Flex flexWrap="wrap" justify="center" bg={"gray.100"}>
             <PhotoProvider
               currentIndex={currentImageIndex}
